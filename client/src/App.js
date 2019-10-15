@@ -5,13 +5,6 @@ import Dashboard from './pages/Dashboard';
 import NoMatch from './pages/NoMatch';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      authType: ''
-    };
-  }
-
   render() {
     return (
       <>
