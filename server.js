@@ -1,9 +1,7 @@
 const express = require('express');
-const session = require('express-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
-require('moment');
 require('dotenv').config();
 
 // Assign port and Start Express Server
@@ -15,15 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // Setup passport
-app.use(
-  session({
-    secret: 'process.env.PASSPORT_SECRET_KEY',
-    resave: true,
-    saveUninitialized: true
-  })
-);
 app.use(passport.initialize());
-app.use(passport.session());
 
 //Load passport strategies
 const db = require('./models');
