@@ -28,7 +28,7 @@ class Dashboard extends Component {
     let dashboardContent;
     let userType = 'Parent';
     
-    // Check if app still loading
+    // Check if app is still loading
     if (this.state.loading) {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
