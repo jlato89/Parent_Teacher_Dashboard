@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class NoMatch extends Component {
-   constructor() {
-      super();
-      this.state = {
-         teacherName: ''
-      };
-   }
-
-   render() {
-      return (
-         <>
-            <h2>Error, No route found!</h2>
-         </>
-      );
-   }
+function NoMatch() {
+  return (
+    <div className='noMatchPage'>
+      <h2>Error, No route found!</h2>
+    </div>
+  );
 }
 
 export default NoMatch;

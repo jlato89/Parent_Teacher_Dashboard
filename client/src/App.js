@@ -8,29 +8,29 @@ import NoMatch from './pages/NoMatch';
 import Dashboard from './pages/Dashboard';
 
 class App extends Component {
-     constructor() {
-      super();
-      this.state = {
-         authType: ''
-      };
-   }
+  constructor() {
+    super();
+    this.state = {
+      authType: ''
+    };
+  }
 
-   render() {
-      return (
-         <div>
-            <Router>
-               <Switch>
-                  <Route exact path='/' component={Login} />
-                  <Route exact path='/register' component={Register} />
-                  <Route exact path='/dashboard' component={Dashboard} />
-                  <Route exact path='/teacherdash' component={TeacherDash} />
-                  <Route exact path='/parentdash' component={ParentDash} />
-                  <Route component={NoMatch} />
-               </Switch>
-            </Router>
-         </div>
-      );
-   }
+  render() {
+    return (
+      <>
+        <Router>
+          <Switch>
+            <Route exact path='/' component={Login} />
+            <Route exact path='/register' component={Register} />
+            <Route exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/teacherdash' component={TeacherDash} />
+            <Route exact path='/parentdash' component={ParentDash} />
+            <Route component={NoMatch} />
+          </Switch>
+        </Router>
+      </>
+    );
+  }
 }
 
 export default App;

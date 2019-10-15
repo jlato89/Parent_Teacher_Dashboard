@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 
 class Login extends Component {
-   constructor() {
-      super();
-      this.state = {
-         teacherName: ''
-      };
-   }
+  constructor() {
+    super();
+    this.state = {
+      teacherName: ''
+    };
+  }
 
-   render() {
-      return (
-         <>
-            <h2>Login Page!</h2>
-         </>
-      );
-   }
+  render() {
+    return (
+      <div className='loginPage'>
+        <h2>Login Page!</h2>
+      </div>
+    );
+  }
 }
 
 export default Login;

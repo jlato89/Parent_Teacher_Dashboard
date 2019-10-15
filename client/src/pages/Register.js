@@ -1,20 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Register extends Component {
-   constructor() {
-      super();
-      this.state = {
-         teacherName: ''
-      };
-   }
-
-   render() {
-      return (
-         <>
-            <h2>Registration Page!</h2>
-         </>
-      );
-   }
+function Register() {
+  return (
+    <div className='registerPage'>
+      <h2>Registration Page!</h2>
+    </div>
+  );
 }
 
 export default Register;
