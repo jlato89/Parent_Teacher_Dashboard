@@ -20,7 +20,7 @@ class Dashboard extends Component {
         isDirector: false
       },
       isAuthed: false,
-      loading: false
+      loading: true
     };
   }
 
@@ -28,6 +28,7 @@ class Dashboard extends Component {
     let dashboardContent;
     let userType = 'Parent';
     
+    // Check if app still loading
     if (this.state.loading) {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
@@ -47,6 +48,8 @@ class Dashboard extends Component {
         </div>
       )
     }
+
+    // Check for userType
     if (this.state.userProfile.isTeacher) {
       userType = 'Teacher';
     }
