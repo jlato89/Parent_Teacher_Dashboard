@@ -14,17 +14,21 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      userType: 'Teacher',
-      name: '',
-      showBtns: true
+      userProfile: {
+        fullName: 'Josh Latour',
+        isTeacher: true,
+        isDirector: false
+      },
+      isAuthed: false,
+      loading: false
     };
   }
 
   render() {
-    const loading = true //! Testing
-    
     let dashboardContent;
-    if (loading) {
+    let userType = 'Parent';
+    
+    if (this.state.loading) {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
           <h2 style={{marginTop: '5%'}}>Loading...</h2>
@@ -36,11 +40,23 @@ class Dashboard extends Component {
           />
         </div>
       );
+    } else {
+      dashboardContent = (
+        <div>
+          <h2>Welcome {this.state.userProfile.fullName}!</h2>
+        </div>
+      )
+    }
+    if (this.state.userProfile.isTeacher) {
+      userType = 'Teacher';
+    }
+    if (this.state.userProfile.isDirector) {
+      userType = 'Director';
     }
 
     return (
       <div className='dashboardPage'>
-        <Banner userType={this.state.userType} />
+        <Banner userType={userType} />
         {dashboardContent}
       </div>
     );
