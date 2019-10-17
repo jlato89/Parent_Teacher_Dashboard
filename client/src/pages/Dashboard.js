@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Banner from '../components/Banner/Banner';
+import Header from '../components/Header/Header'
 
 const styles = {
   loadingWrapper: {
@@ -17,7 +17,21 @@ class Dashboard extends Component {
       userProfile: {
         fullName: 'Josh Latour',
         isTeacher: true,
-        isDirector: false
+        isDirector: false,
+        studentArr: [
+          {
+            id: 1,
+            name: 'Student1 Name',
+            age: 3,
+            allergies: ['Peanuts', 'Milk', 'Red Dye']
+          },
+          {
+            id: 2,
+            name: 'Student2 Name',
+            age: 4,
+            allergies: ['Apples', 'Cheese', 'blue Dye']
+          }
+        ]
       },
       isAuthed: false,
       loading: true
@@ -28,7 +42,7 @@ class Dashboard extends Component {
     let dashboardContent;
     let userType = 'Parent';
     
-    // Check if app is still loading
+    //? Check if app is still loading
     if (this.state.loading) {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
@@ -49,7 +63,7 @@ class Dashboard extends Component {
       )
     }
 
-    // Check for userType
+    //? Check for userType
     if (this.state.userProfile.isTeacher) {
       userType = 'Teacher';
     }
@@ -59,7 +73,7 @@ class Dashboard extends Component {
 
     return (
       <div className='dashboardPage'>
-        <Banner userType={userType} />
+        <Header userType={userType} />
         {dashboardContent}
       </div>
     );
