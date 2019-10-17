@@ -49,11 +49,11 @@ class Login extends Component {
         <img
           src={require('../assets/images/happy-children-and-daycare.png')}
           alt='paper plane logo'
-          style={{ height: 200, margin: '30px auto', display: 'block' }}
+          style={{ height: 250, margin: '30px auto', display: 'block' }}
         />
 
         <form
-          style={{ margin: '0 auto', width: 'fit-content' }}
+          style={{ margin: '0 auto', width: '60%' }}
           onSubmit={this.onSubmit}
           className='ui form'
         >
@@ -63,7 +63,7 @@ class Login extends Component {
             </label>
             <br />
             <input
-              autoComplete='username'
+              style={{ width: '100%', fontSize: '1.5rem' }}
               name='Username'
               type='Username'
               value={this.state.userName}
@@ -72,7 +72,7 @@ class Login extends Component {
           </div>
 
           <div
-            style={{ margin: '6px 0' }}
+            style={{ margin: '7px 0' }}
             className={`field ${errors.password ? 'error' : ''}`}
           >
             <label>
@@ -80,6 +80,7 @@ class Login extends Component {
             </label>
             <br />
             <input
+              style={{ width: '100%', fontSize: '1.5rem' }}
               autoComplete='password'
               name='password'
               type='password'
@@ -87,12 +88,14 @@ class Login extends Component {
               onChange={this.onChange}
             />
           </div>
-
-          <input
-            style={{ float: 'right' }}
-            type='submit'
-            className='ui button grey fluid'
-          />
+          <div style={{ marginTop: '10px' }}>
+            <input type='checkbox' name='rememberMe' />
+            <label>Remember Me</label>
+            <input style={{ float: 'right', fontSize: '1rem' }} type='submit' />
+            <p>
+              <a href='/resetpsw'>Forgot password?</a>
+            </p>
+          </div>
         </form>
       </div>
     );
