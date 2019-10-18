@@ -1,21 +1,25 @@
 const express = require('express');
-const passport = require('passport');
 const bodyParser = require('body-parser');
 const path = require('path');
+const passport = require('passport');
+const logger = require('morgan');
 require('dotenv').config();
 
 // Assign port and Start Express Server
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-//Setup BodyParser
+// Setup BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+// Setup Logger
+app.use(logger('dev'));
 
 // Setup passport
 app.use(passport.initialize());
 
-//Load passport strategies
+// Load passport strategies
 const db = require('./models');
 // require('./config/passport.js')(passport, db);
 
@@ -25,7 +29,11 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Define Routes
-// require('./routes/api')(app, passport, db);
+require('./routes/loginUser')(app);
+require('./routes/registerUser')(app);
+require('./routes/findUsers')(app);
+require('./routes/deleteUser')(app);
+require('./routes/updateUser')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
