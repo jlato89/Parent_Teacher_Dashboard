@@ -27,7 +27,7 @@ passport.use(
           .then(user => {
             if (user != null) {
               console.log('username already taken');
-              return done(null, false, { message: 'usernamealready taken' });
+              return done(null, false, { message: 'username already taken' });
             } else {
               bcrypt.hash(password, BCRYPT_SALT_ROUNDS).then(hashedPassword => {
                 db.user
@@ -35,6 +35,9 @@ passport.use(
                   .then(user => {
                     console.log('user created');
                     return done(null, user);
+                  })
+                  .catch(err => {
+                    console.log(err);
                   });
               });
             }
@@ -50,7 +53,7 @@ passport.use(
   'login',
   new localStrategy(
     {
-      usernameField: 'username',
+      usernameField: 'userName',
       passwordField: 'password',
       session: false
     },
