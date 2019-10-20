@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 
 // Setup BodyParser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Setup Logger
