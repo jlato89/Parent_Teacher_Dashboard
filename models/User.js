@@ -5,10 +5,6 @@ module.exports = function(sequelize, Sequelize) {
          primaryKey: true,
          defaultValue: Sequelize.UUIDV4
       },
-      fullName: {
-         type: Sequelize.STRING,
-         allowNull: false
-      },
       userName: {
          type: Sequelize.STRING,
          allowNull: false
@@ -24,6 +20,9 @@ module.exports = function(sequelize, Sequelize) {
       isDirector: {
          type: Sequelize.BOOLEAN,
          defaultValue: 0
+      },
+      fullName: {
+         type: Sequelize.STRING
       },
       fullName2: {
          type: Sequelize.STRING
