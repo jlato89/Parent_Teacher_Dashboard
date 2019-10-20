@@ -18,10 +18,10 @@ app.use(logger('dev'));
 
 // Setup passport
 app.use(passport.initialize());
+require('./config/passport.js');
 
 // Load passport strategies
 const db = require('./models');
-// require('./config/passport.js')(passport, db);
 
 // Setup Misc
 app.use(express.urlencoded({ extended: true }));
