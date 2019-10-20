@@ -10,7 +10,7 @@ module.exports = app => {
         console.log(info.message);
         res.send(info.message);
       } else {
-        console.log('user foun in db from route');
+        console.log('user found in db from route');
         res.status(200).send({
           auth: true,
           user,
