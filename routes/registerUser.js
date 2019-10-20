@@ -32,7 +32,7 @@ module.exports = app => {
               userName: data.userName
             }
           }).then(user => {
-            db.user
+            user
               .update({
                 fullName: data.fullName
                 //! add more fields
