@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const db = require('../models');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
 
@@ -13,7 +13,7 @@ module.exports = app => {
         res.send(info.message);
       } else {
         req.logIn(user, err => {
-          User.findOne({
+          db.user.findOne({
             where: {
               userName: user.userName
             }
