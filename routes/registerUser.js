@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const db = require('../models');
 const passport = require('passport');
 
 module.exports = app => {
@@ -16,7 +16,6 @@ module.exports = app => {
             fullName: req.body.fullName,
             userName: req.body.userName,
             email: req.body.email,
-            password: req.body.password, //! Do we save this or does JWT handle passwords
             isTeacher: req.body.isTeacher,
             isDirector: req.body.isDirector,
             fullName2: req.body.fullName2,
@@ -28,12 +27,12 @@ module.exports = app => {
             emergencyRelation: req.body.emergencyRelation,
             approvedNames: req.body.approvedNames
           };
-          User.findOne({
+          db.user.findOne({
             where: {
               userName: data.userName
             }
           }).then(user => {
-            user
+            db.user
               .update({
                 fullName: data.fullName
                 //! add more fields
