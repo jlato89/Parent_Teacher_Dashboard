@@ -13,10 +13,12 @@ module.exports = app => {
         console.log('user found in db from route');
         res.status(200).send({
           auth: true,
-          user,
+          fullName: user.fullName,
+          userName: user.userName,
+          //! add more fields later
           message: 'user found in db'
         });
       }
-    })(req.res, next);
+    })(req, res, next);
   });
 };
