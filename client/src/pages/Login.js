@@ -30,7 +30,7 @@ class Login extends Component {
     e.preventDefault();
 
     const userData = {
-      email: this.state.email,
+      userName: this.state.userName,
       password: this.state.password
     };
 
@@ -89,10 +89,10 @@ class Login extends Component {
             />
           </div>
           <div style={{ marginTop: '10px' }}>
-            <input type='checkbox' name='rememberMe' />
-            <label>Remember Me</label>
+            {/* <input type='checkbox' name='rememberMe' />
+            <label>Remember Me</label> */}
             <input style={{ float: 'right', fontSize: '1rem' }} type='submit' />
-            <p>
+            <p style={{ fontSize: '.75rem' }}>
               <a href='/resetpsw'>Forgot password?</a>
             </p>
           </div>
