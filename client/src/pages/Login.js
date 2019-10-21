@@ -64,7 +64,7 @@ class Login extends Component {
             <br />
             <input
               style={{ width: '100%', fontSize: '1.5rem' }}
-              name='Username'
+              name='userName'
               type='Username'
               value={this.state.userName}
               onChange={this.onChange}
