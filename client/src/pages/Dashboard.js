@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import Axios from 'axios';
+import setAuthToken from '../utils/setAuthToken'
+import Moment from 'react-moment';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
 
@@ -15,40 +19,49 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      isAuthed: false,
+      redirect: false,
       loading: true,
-      userProfile: {
-        fullName: 'Josh Latour',
-        isTeacher: true,
-        isDirector: false
-      },
+      user: {},
       announcements: {
-          id: 1,
-          msg: 'School will be closed due to mold',
-          date: 'Mon 24'
-        },
-      studentArr: [
-        {
-          id: 1,
-          name: 'Student1 Name',
-          age: 3,
-          allergies: ['Peanuts', 'Milk', 'Red Dye']
-        },
-        {
-          id: 2,
-          name: 'Student2 Name',
-          age: 4,
-          allergies: ['Apples', 'Cheese', 'blue Dye']
-        }
-      ]
+        id: 1,
+        msg: 'School will be closed due to mold',
+        date: 'Mon 24'
+      },
+      studentArr: []
     };
   }
 
-  render() {
-    let dashboardContent;
-    let userType = 'Parent';
+  componentDidMount() {
+    // Check for token in localStorage
+    const token = localStorage.getItem('ptDash');
+    if (token) {setAuthToken(token)}
 
-    //? Check if app is still loading
+    Axios
+      .get('/findUser')
+      .then(response => {
+        console.log(response.data);
+        this.setState({ user: response.data.user, loading: false })
+      })
+      .catch(err => {
+        console.log(err.response);
+      })
+  }
+
+  handleLogout = () => {
+    localStorage.removeItem('ptDash');
+    this.setState({ redirect: true });
+  };
+
+  render() {
+    const { redirect, user } = this.state;
+    let dashboardContent;
+
+    // Redirect to homepage if logout
+    if (redirect) {
+      return <Redirect to='/' />;
+    }
+
+    //? Content to render when app is loading
     if (this.state.loading) {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
@@ -60,25 +73,29 @@ class Dashboard extends Component {
           />
         </div>
       );
-    } else {
+    } 
+    //? Main content to render once app is finished loading
+    else {
       dashboardContent = (
         <div>
-          <h2>Welcome {this.state.userProfile.fullName}!</h2>
+          <h2>Welcome {user.fullName}!</h2>
+          <p>
+            <strong>Email: {user.email}</strong>
+          </p>
+          <p>
+            <strong>
+              Member since: <Moment date={user.createdAt} format='MM/DD/YYYY'/>
+            </strong>
+          </p>
+          <button onClick={this.handleLogout}>Logout</button>
         </div>
       );
     }
 
-    //? Check for userType
-    if (this.state.userProfile.isTeacher) {
-      userType = 'Teacher';
-    }
-    if (this.state.userProfile.isDirector) {
-      userType = 'Director';
-    }
 
     return (
       <div className='dashboardPage'>
-        <Header userType={userType} />
+        <Header />
         <Announcements data={this.state.announcements} />
         {dashboardContent}
       </div>
