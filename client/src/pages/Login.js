@@ -1,12 +1,41 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 const styles = {
+  rootContainer: {
+    margin: '0 auto',
+    width: '70%'
+  },
   header: {
     fontSize: '2rem',
+    fontWeight: '300',
     textAlign: 'center',
     textTransform: 'uppercase',
-    letterSpacing: 1.1,
-    fontWeight: '300'
+    letterSpacing: 1.1
+  },
+  logo: {
+    height: 250,
+    margin: '10px auto',
+    display: 'block'
+  },
+  form: {
+    width: '80%',
+    margin: '0 auto'
+  },
+  formInputs: {
+    width: '100%',
+    fontSize: '1.5rem'
+  },
+  submitBtn: {
+    float: 'right',
+    fontSize: '1rem'
+  },
+  errors: {
+    backgroundColor: 'red',
+    fontWeight: 'bold',
+    width: 'fit-content',
+    margin: '0 auto',
+    padding: '5px 10px'
   }
 };
 
@@ -16,7 +45,7 @@ class Login extends Component {
     this.state = {
       userName: '',
       password: '',
-      errors: {}
+      errors: ''
     };
   }
 
@@ -34,53 +63,53 @@ class Login extends Component {
       password: this.state.password
     };
 
-    this.props.loginUser(userData);
+    axios
+      .post('/loginUser', userData)
+      .then(response => {
+        this.setState({ errors: '' });
+        console.log(response.data);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({
+          errors: err.response.data
+        });
+      });
   };
 
   render() {
     const { errors } = this.state;
 
     return (
-      <div>
-        <h1 style={styles.header}>
-          PT Dashboard <br />
-        </h1>
+      <div style={styles.rootContainer}>
+        <h1 style={styles.header}>PT Dashboard</h1>
 
         <img
           src={require('../assets/images/happy-children-and-daycare.png')}
           alt='paper plane logo'
-          style={{ height: 250, margin: '30px auto', display: 'block' }}
+          style={styles.logo}
         />
 
-        <form
-          style={{ margin: '0 auto', width: '60%' }}
-          onSubmit={this.onSubmit}
-          className='ui form'
-        >
-          <div className={`field ${errors.userName ? 'error' : ''}`}>
-            <label>
-              {errors.userName ? <p>{errors.userName}</p> : 'Username'}
-            </label>
+        {/* Show error message if error state is true */}
+        {errors && <div style={styles.errors}>{errors}</div>}
+
+        <form style={styles.form} onSubmit={this.onSubmit}>
+          <div>
+            <label>Username</label>
             <br />
             <input
-              style={{ width: '100%', fontSize: '1.5rem' }}
+              style={styles.formInputs}
               name='userName'
               type='Username'
               value={this.state.userName}
               onChange={this.onChange}
             />
           </div>
-
-          <div
-            style={{ margin: '7px 0' }}
-            className={`field ${errors.password ? 'error' : ''}`}
-          >
-            <label>
-              {errors.password ? <p>{errors.password}</p> : 'Password'}
-            </label>
+          <div>
+            <label>Password</label>
             <br />
             <input
-              style={{ width: '100%', fontSize: '1.5rem' }}
+              style={styles.formInputs}
               autoComplete='password'
               name='password'
               type='password'
@@ -88,14 +117,12 @@ class Login extends Component {
               onChange={this.onChange}
             />
           </div>
-          <div style={{ marginTop: '10px' }}>
-            {/* <input type='checkbox' name='rememberMe' />
-            <label>Remember Me</label> */}
-            <input style={{ float: 'right', fontSize: '1rem' }} type='submit' />
-            <p style={{ fontSize: '.75rem' }}>
+          <p>
+            <input style={styles.submitBtn} type='submit' />
+            <sub>
               <a href='/resetpsw'>Forgot password?</a>
-            </p>
-          </div>
+            </sub>
+          </p>
         </form>
       </div>
     );
