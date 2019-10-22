@@ -24,7 +24,7 @@ module.exports = app => {
             );
             res.status(200).send({
               auth: true,
-              token: token,
+              token: 'JWT ' + token,
               message: 'user found & logged in'
             });
           });
