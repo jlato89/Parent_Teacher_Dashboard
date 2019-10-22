@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-import Axios from 'axios';
-import setAuthToken from '../utils/setAuthToken'
+import axios from 'axios';
+import setAuthToken from '../utils/setAuthToken';
 import Moment from 'react-moment';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
@@ -22,29 +22,36 @@ class Dashboard extends Component {
       redirect: false,
       loading: true,
       user: {},
-      announcements: {
-        id: 1,
-        msg: 'School will be closed due to mold',
-        date: 'Mon 24'
-      },
+      eventArr: [],
       studentArr: []
     };
   }
 
   componentDidMount() {
-    // Check for token in localStorage
+    //? Check for token in localStorage, if true set default headers
     const token = localStorage.getItem('ptDash');
-    if (token) {setAuthToken(token)}
+    if (token) {
+      setAuthToken(token);
+    }
 
-    Axios
-      .get('/findUser')
-      .then(response => {
-        console.log(response.data);
-        this.setState({ user: response.data.user, loading: false })
-      })
-      .catch(err => {
-        console.log(err.response);
-      })
+    //? Run all calls for info that needs to be retrieved.
+    axios
+      .all([
+        axios.get('/findUser'),
+        axios.get('/findEvent'),
+        axios.get('/findStudent')
+      ])
+      .then(
+        axios.spread((userData, eventData, studentData) => {
+          this.setState({
+            user: userData.data.user,
+            eventArr: eventData.data,
+            studentArr: studentData.data,
+            loading: false
+          });
+        })
+      )
+      .catch(err => console.log(err.response));
   }
 
   handleLogout = () => {
@@ -73,7 +80,7 @@ class Dashboard extends Component {
           />
         </div>
       );
-    } 
+    }
     //? Main content to render once app is finished loading
     else {
       dashboardContent = (
@@ -84,14 +91,13 @@ class Dashboard extends Component {
           </p>
           <p>
             <strong>
-              Member since: <Moment date={user.createdAt} format='MM/DD/YYYY'/>
+              Member since: <Moment date={user.createdAt} format='MM/DD/YYYY' />
             </strong>
           </p>
           <button onClick={this.handleLogout}>Logout</button>
         </div>
       );
     }
-
 
     return (
       <div className='dashboardPage'>
