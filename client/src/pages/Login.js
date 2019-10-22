@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Redirect} from 'react-router-dom';
 
 const styles = {
   rootContainer: {
@@ -43,6 +44,7 @@ class Login extends Component {
   constructor() {
     super();
     this.state = {
+      redirect: false,
       userName: '',
       password: '',
       errors: ''
@@ -66,7 +68,10 @@ class Login extends Component {
     axios
       .post('/loginUser', userData)
       .then(response => {
-        this.setState({ errors: '' });
+        this.setState({
+          errors: '',
+          redirect: true
+        });
         console.log(response.data);
       })
       .catch(err => {
@@ -78,7 +83,11 @@ class Login extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to='/dashboard' />
+    }
 
     return (
       <div style={styles.rootContainer}>
