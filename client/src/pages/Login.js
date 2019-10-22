@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect} from 'react-router-dom';
+import Authenticate from '../utils/Authenticate';
 
 const styles = {
   rootContainer: {
@@ -51,6 +52,15 @@ class Login extends Component {
     };
   }
 
+  componentDidMount() {
+    const token = localStorage.getItem('ptDash');
+
+    if (Authenticate(token)) {
+      this.setState({ redirect: true });
+      console.log('Already Authed, redirected back to dashboard');
+    }
+  }
+
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -68,10 +78,16 @@ class Login extends Component {
     axios
       .post('/loginUser', userData)
       .then(response => {
-        this.setState({
-          errors: '',
-          redirect: true
-        });
+        if(response.data.token) {
+          const { token } = response.data
+
+          localStorage.setItem('ptDash', token)
+
+          this.setState({
+            errors: '',
+            redirect: true
+          });
+        }
         console.log(response.data);
       })
       .catch(err => {
