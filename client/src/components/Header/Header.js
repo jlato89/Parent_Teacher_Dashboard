@@ -22,7 +22,7 @@ function Header(props) {
       <a href='/mail'>
         <img src={MailIcon} alt='Mail Icon' height='30px' />
       </a>
-      <span>{props.userType} Dashboard</span>
+      <span>PT Dashboard</span>
       <img src={MenuIcon} alt='Menu Icon' height='30px' />
     </div>
   );
