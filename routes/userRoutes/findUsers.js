@@ -10,7 +10,8 @@ module.exports = app => {
         console.log(info.message);
         res.send(info.message);
       } else {
-        console.log('user found in db from route');
+        delete user.dataValues.password;
+
         res.status(200).send({
           user,
           message: 'user found in db'
