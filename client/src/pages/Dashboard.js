@@ -34,17 +34,31 @@ class Dashboard extends Component {
       setAuthToken(token);
     }
 
+    axios
+      .get('/findUser')
+      .then(userData => {
+        console.log('User:', userData.data.user);
+        this.setState({ user: userData.data.user })
+      })
+      .catch(err => console.log(err.response));
+
+    //? Check if parent, if true grab students associated with the user ID
+    let findStudent = '/findStudent'
+    if (!this.state.user.isTeacher) {
+      findStudent = `/findStudent/${this.state.user.id}`; //! Set parent ID here
+    }
+
     //? Run all calls for info that needs to be retrieved.
     axios
       .all([
-        axios.get('/findUser'),
         axios.get('/findEvent'),
-        axios.get('/findStudent')
+        axios.get(findStudent)
       ])
       .then(
-        axios.spread((userData, eventData, studentData) => {
+        axios.spread((eventData, studentData) => {
+          console.log('Events:', eventData.data);
+          console.log('Students:', studentData.data);
           this.setState({
-            user: userData.data.user,
             eventArr: eventData.data,
             studentArr: studentData.data,
             loading: false
