@@ -13,13 +13,9 @@ module.exports = function(sequelize, Sequelize) {
          type: Sequelize.TEXT,
          allowNull: false
       },
-      isTeacher: {
-         type: Sequelize.BOOLEAN,
-         defaultValue: 0
-      },
-      isDirector: {
-         type: Sequelize.BOOLEAN,
-         defaultValue: 0
+      userType: {
+         type: Sequelize.STRING,
+         defaultValue: 'parent'
       },
       fullName: {
          type: Sequelize.STRING
