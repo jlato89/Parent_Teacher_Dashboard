@@ -16,8 +16,7 @@ const styles = {
 };
 const Announcement = props => {
   let announcements;
-
-  if (props.announcements) {
+  if (props.announcements.length > 0) {
     announcements = (
       <div style={styles.container}>
         {props.announcements.map(announcement => {
