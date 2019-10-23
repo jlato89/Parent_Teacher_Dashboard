@@ -1,10 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
   const Event = sequelize.define('event', {
-    id: {
-      type: Sequelize.UUID,
-      primaryKey: true,
-      defaultValue: Sequelize.UUIDV4
-    },
     title: {
       type: Sequelize.STRING,
     },
