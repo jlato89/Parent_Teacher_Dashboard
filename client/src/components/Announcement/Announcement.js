@@ -1,43 +1,42 @@
 import React from 'react';
+import Moment from 'react-moment';
 
-function Announcement(props) {
-  // let announcements = null;
+const styles = {
+  container: {
+    backgroundColor: '#FFED4F',
+    fontSize: '1rem',
+    padding: '5px'
+  },
+  date: {
+    fontWeight: 'bold'
+  },
+  desc: {
+    float: 'right'
+  }
+};
+const Announcement = props => {
+  let announcements;
 
-  // if (props.data) {
-  //   announcements = (
-  //     <p>
-  //       {props.data.map(announcement => {
-  //         return (
-  //           <Announcement
-  //             key={announcement.id}
-  //             header={announcement.header}
-  //             desc={announcement.desc}
-  //             date={announcement.date}
-  //           />
-  //         );
-  //       })}
-  //     </p>
-  //   );
-  // }
-  // console.log(props.data);
-  // console.log(announcements);
-  return (
-    <div style={{ backgroundColor: '#FFED4F', padding: '5px' }}>
-      <p
-        style={{
-          fontWeight: 'bold',
-          textAlign: 'center',
-          margin: '0 0 7px 0'
-        }}
-      >
-        Importnant Announcement's
-      </p>
-      <div style={{ fontSize: '.8rem' }}>
-        ({props.data.date})
-        <span style={{ float: 'right' }}>{props.data.msg}</span>
+  if (props.announcements) {
+    announcements = (
+      <div style={styles.container}>
+        {props.announcements.map(announcement => {
+          return (
+            <div key={announcement.id}>
+              <span style={styles.date}>
+                (<Moment date={announcement.eventDate} format='MM/DD' />)
+              </span>
+              <span style={styles.desc}>
+                {announcement.description}
+              </span>
+            </div>
+          );
+        })}
       </div>
-    </div>
-  );
-}
+    );
+  }
+
+  return <>{announcements}</>;
+};
 
 export default Announcement;
