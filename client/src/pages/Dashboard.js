@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
+import Authenticate from '../utils/Authenticate';
 import Moment from 'react-moment';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
@@ -27,14 +28,14 @@ class Dashboard extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     //? Check for token in localStorage, if true set default headers
     const token = localStorage.getItem('ptDash');
-    if (token) {
+    if (Authenticate(token)) {
       setAuthToken(token);
     }
 
-    axios
+    await axios
       .get('/findUser')
       .then(userData => {
         console.log('User:', userData.data.user);
@@ -44,8 +45,8 @@ class Dashboard extends Component {
 
     //? Check if parent, if true grab students associated with the user ID
     let findStudent = '/findStudent'
-    if (!this.state.user.isTeacher) {
-      findStudent = `/findStudent/${this.state.user.id}`; //! Set parent ID here
+    if (this.state.user.userType === 'parent') {
+      findStudent = `/findStudent/${this.state.user.id}`;
     }
 
     //? Run all calls for info that needs to be retrieved.
@@ -77,7 +78,12 @@ class Dashboard extends Component {
     const { redirect, user } = this.state;
     let dashboardContent;
 
-    // Redirect to homepage if logout
+    //? Pull announcements from state.eventArr
+    const announcements = this.state.eventArr.filter(event => {
+      return event.isAnnouncement === true;
+    });
+
+    //? Redirect to homepage if logout
     if (redirect) {
       return <Redirect to='/' />;
     }
@@ -116,7 +122,7 @@ class Dashboard extends Component {
     return (
       <div className='dashboardPage'>
         <Header />
-        <Announcements data={this.state.announcements} />
+        <Announcements announcements={announcements} />
         {dashboardContent}
       </div>
     );
