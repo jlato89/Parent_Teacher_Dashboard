@@ -100,7 +100,7 @@ passport.use(
       db.user
         .findOne({
           where: {
-            userName: jwt_payload.id
+            id: jwt_payload.id
           }
         })
         .then(user => {
