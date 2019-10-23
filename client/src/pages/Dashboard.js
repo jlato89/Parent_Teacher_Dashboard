@@ -105,7 +105,9 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <div>
-          <h2>Welcome {user.fullName}!</h2>
+          <h2>
+            Welcome {user.firstName} {user.lastName}!
+          </h2>
           <p>
             <strong>Email: {user.email}</strong>
           </p>
