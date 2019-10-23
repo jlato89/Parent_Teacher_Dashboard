@@ -19,12 +19,16 @@ module.exports = app => {
             }
           }).then(user => {
             const token = jwt.sign(
-              { id: user.userName },
-              process.env.JWT_SECRET
+              {
+                id: user.userName,
+                userType: user.userType
+              },
+              process.env.JWT_SECRET,
+              { expiresIn: 3600 * 12 }, //! 1 hour x 12
             );
             res.status(200).send({
               auth: true,
-              token: 'JWT ' + token,
+              token: `JWT ${token}`,
               message: 'user found & logged in'
             });
           });
