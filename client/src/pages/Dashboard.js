@@ -4,9 +4,9 @@ import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import Authenticate from '../utils/Authenticate';
-import Moment from 'react-moment';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
+import MenuBtn from '../components/MenuBtn/MenuBtn';
 
 const styles = {
   loadingWrapper: {
@@ -108,20 +108,22 @@ class Dashboard extends Component {
     //? Main content to render once app is finished loading
     else {
       dashboardContent = (
-        <div>
+        <>
+          <button onClick={this.handleLogout}>Logout</button>
           <h2>
             Welcome {user.firstName} {user.lastName}!
           </h2>
-          <p>
-            <strong>Email: {user.email}</strong>
-          </p>
-          <p>
-            <strong>
-              Member since: <Moment date={user.createdAt} format='MM/DD/YYYY' />
-            </strong>
-          </p>
-          <button onClick={this.handleLogout}>Logout</button>
-        </div>
+
+          {/* Menu Btns */}
+          <main>
+            <MenuBtn name='Create Report' link='/link' />
+            <MenuBtn name='Students' link='/link' />
+            <MenuBtn name='Create Incident' link='/link' />
+            <MenuBtn name='Reports & Incidents' link='/link' />
+            <MenuBtn name='Create Event or Announcement' link='/link' />
+            <MenuBtn name='Current Events & Announcements' link='/link' />
+          </main>
+        </>
       );
     }
 
