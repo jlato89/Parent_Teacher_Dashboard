@@ -1,31 +1,19 @@
 import React from 'react';
 import Moment from 'react-moment';
+import './Announcement-module.css';
 
-const styles = {
-  container: {
-    backgroundColor: '#FFED4F',
-    fontSize: '1rem',
-    padding: '5px'
-  },
-  date: {
-    fontWeight: 'bold'
-  },
-  desc: {
-    float: 'right'
-  }
-};
 const Announcement = props => {
   let announcements;
   if (props.announcements.length > 0) {
     announcements = (
-      <div style={styles.container}>
+      <div className='container'>
         {props.announcements.map(announcement => {
           return (
             <div key={announcement.id}>
-              <span style={styles.date}>
+              <span className='date'>
                 (<Moment date={announcement.eventDate} format='MM/DD' />)
               </span>
-              <span style={styles.desc}>
+              <span className='desc'>
                 {announcement.description}
               </span>
             </div>

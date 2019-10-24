@@ -1,0 +1,11 @@
+.container {
+  background-color: #FFED4F;
+  font-size: 1rem;
+  padding: 5px;
+}
+.date {
+  font-weight: bold;
+}
+.desc {
+  float: right;
+}
