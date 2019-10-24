@@ -6,9 +6,9 @@ import './Header-module.css';
 function Header() {
   return (
     <div className='header'>
-      <img className='mailBtn' src={MailIcon} alt='Mail Icon' height='30px' />
+      <img className='mailIcon' src={MailIcon} alt='Mail Icon' height='30px' />
       <span className='headerText'>PT Dashboard</span>
-      <img className='menuBtn' src={MenuIcon} alt='Menu Icon' height='30px' />
+      <img className='menuIcon' src={MenuIcon} alt='Menu Icon' height='30px' />
     </div>
   );
 }
