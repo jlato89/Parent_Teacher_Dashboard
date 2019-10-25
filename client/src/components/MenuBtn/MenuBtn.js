@@ -1,9 +1,9 @@
 import React from 'react';
-import './MenuBtn-module.css';
+import styles from './MenuBtn.module.css';
 
 function MenuBtn(props) {
   return (
-    <div className='item'>
+    <div className={styles.item}>
       <a href={props.link}>{props.name}</a>
     </div>
   );
