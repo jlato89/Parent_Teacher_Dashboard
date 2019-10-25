@@ -8,15 +8,7 @@ import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
 import Logo from '../components/Logo/Logo';
 import MenuBtn from '../components/MenuBtn/MenuBtn';
-
-const styles = {
-  loadingWrapper: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'column'
-  }
-};
+import styles from './Dashboard.module.css';
 
 class Dashboard extends Component {
   constructor() {
@@ -96,8 +88,8 @@ class Dashboard extends Component {
     //? Content to render when app is loading
     if (this.state.loading) {
       dashboardContent = (
-        <div style={styles.loadingWrapper}>
-          <h2 style={{ marginTop: '5%' }}>Loading...</h2>
+        <div className={styles.container}>
+          <h2>Loading...</h2>
           <Logo />
         </div>
       );
