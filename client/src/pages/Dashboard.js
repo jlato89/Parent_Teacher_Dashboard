@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 import Authenticate from '../utils/Authenticate';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
+import Logo from '../components/Logo/Logo';
 import MenuBtn from '../components/MenuBtn/MenuBtn';
 
 const styles = {
@@ -97,11 +98,7 @@ class Dashboard extends Component {
       dashboardContent = (
         <div style={styles.loadingWrapper}>
           <h2 style={{ marginTop: '5%' }}>Loading...</h2>
-          <img
-            alt='logo'
-            style={{ height: 150, width: 150 }}
-            src={require('../assets/images/happy-children-and-daycare.png')}
-          />
+          <Logo />
         </div>
       );
     }
