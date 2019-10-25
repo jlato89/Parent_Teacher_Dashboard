@@ -98,28 +98,15 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <>
+          <Header profileImg={user.profileImage} name={user.firstName} />
+          <Announcements announcements={announcements} />
           <button onClick={this.handleLogout}>Logout</button>
-          <h2>
-            Welcome {user.firstName} {user.lastName}!
-          </h2>
-
-          {/* Menu Btns */}
-          <main>
-            <MenuBtn name='Create Report' link='/link' />
-            <MenuBtn name='Students' link='/link' />
-            <MenuBtn name='Create Incident' link='/link' />
-            <MenuBtn name='Reports & Incidents' link='/link' />
-            <MenuBtn name='Create Event or Announcement' link='/link' />
-            <MenuBtn name='Current Events & Announcements' link='/link' />
-          </main>
         </>
       );
     }
 
     return (
       <div className='dashboardPage'>
-        <Header />
-        <Announcements announcements={announcements} />
         {dashboardContent}
       </div>
     );
