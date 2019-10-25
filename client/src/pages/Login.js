@@ -2,44 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect} from 'react-router-dom';
 import Authenticate from '../utils/Authenticate';
-
-const styles = {
-  rootContainer: {
-    margin: '0 auto',
-    width: '70%'
-  },
-  header: {
-    fontSize: '2rem',
-    fontWeight: '300',
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    letterSpacing: 1.1
-  },
-  logo: {
-    height: 250,
-    margin: '10px auto',
-    display: 'block'
-  },
-  form: {
-    width: '80%',
-    margin: '0 auto'
-  },
-  formInputs: {
-    width: '100%',
-    fontSize: '1.5rem'
-  },
-  submitBtn: {
-    float: 'right',
-    fontSize: '1rem'
-  },
-  errors: {
-    backgroundColor: 'red',
-    fontWeight: 'bold',
-    width: 'fit-content',
-    margin: '0 auto',
-    padding: '5px 10px'
-  }
-};
+import styles from './Login.module.css';
+import Logo from '../components/Logo/Logo';
 
 class Login extends Component {
   constructor() {
@@ -106,24 +70,18 @@ class Login extends Component {
     }
 
     return (
-      <div style={styles.rootContainer}>
-        <h1 style={styles.header}>PT Dashboard</h1>
-
-        <img
-          src={require('../assets/images/happy-children-and-daycare.png')}
-          alt='paper plane logo'
-          style={styles.logo}
-        />
+      <div className={styles.rootContainer}>
+        <h1 className={styles.header}>PT Dashboard</h1>
+        <center><Logo size='250'/></center>
 
         {/* Show error message if error state is true */}
-        {errors && <div style={styles.errors}>{errors}</div>}
+        {errors && <div className={styles.errors}>{errors}</div>}
 
-        <form style={styles.form} onSubmit={this.onSubmit}>
+        <form className={styles.form} onSubmit={this.onSubmit}>
           <div>
             <label>Username</label>
-            <br />
             <input
-              style={styles.formInputs}
+              className={styles.formInput}
               name='userName'
               type='Username'
               value={this.state.userName}
@@ -132,9 +90,8 @@ class Login extends Component {
           </div>
           <div>
             <label>Password</label>
-            <br />
             <input
-              style={styles.formInputs}
+              className={styles.formInput}
               autoComplete='password'
               name='password'
               type='password'
@@ -143,7 +100,7 @@ class Login extends Component {
             />
           </div>
           <p>
-            <input style={styles.submitBtn} type='submit' />
+            <input className={styles.submitBtn} type='submit' />
             <sub>
               <a href='/resetpsw'>Forgot password?</a>
             </sub>
