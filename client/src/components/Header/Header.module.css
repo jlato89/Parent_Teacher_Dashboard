@@ -1,8 +1,12 @@
-.header {
+.container {
   background-color: #98CEFF;
   display: flex;
   justify-content: space-between;
   padding: 5px;
   font-size: 1.4rem;
   font-weight: bold;
+}
+.headerText a {
+  text-decoration: none;
+  color: #000;
 }

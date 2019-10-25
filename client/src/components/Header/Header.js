@@ -5,14 +5,18 @@ import styles from './Header.module.css';
 
 function Header() {
   return (
-    <div className={styles.header}>
+    <div className={styles.container}>
       <img
         className={styles.mailIcon}
         src={MailIcon}
         alt='Mail Icon'
         height='30px'
       />
-      <span className={styles.headerText}>PT Dashboard</span>
+      <span className={styles.headerText}>
+        <a href='/dashboard'>
+          PT Dashboard
+        </a>
+      </span>
       <img
         className={styles.menuIcon}
         src={MenuIcon}
