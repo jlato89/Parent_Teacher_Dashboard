@@ -1,12 +1,28 @@
 .container {
-  background-color: #98CEFF;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #00F0FF 100%), #1FA1FF;
+  text-align: center;
+  height: 25vh;
+  padding: 5px;
+}
+.topHeader {
   display: flex;
   justify-content: space-between;
-  padding: 5px;
+}
+.topHeaderText a {
   font-size: 1.4rem;
   font-weight: bold;
-}
-.headerText a {
   text-decoration: none;
-  color: #000;
+  color: #fff;
+}
+.profileImg {
+  height: 130px;
+  border-radius: 100%;
+  margin: 4% 0;
+}
+.bottomHeaderText p {
+  color: #fff;
+  margin: 0;
+}
+.bottomHeaderText .bold {
+  font-weight: bold;
 }
