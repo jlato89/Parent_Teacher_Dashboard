@@ -1,0 +1,35 @@
+.rootContainer {
+  width: 70%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.header {
+  font-size: 2rem;
+  font-weight: 300;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.1;
+}
+.logo {
+  margin: 10px auto;
+  display: block;
+}
+.form {
+  width: 80%;
+  margin: 0 auto;
+}
+.formInput {
+  width: 100%;
+  font-size: 1.5rem;
+}
+.submitBtn {
+  float: right;
+  font-size: 1rem;
+}
+.errors {
+  background-color: red;
+  font-weight: bold;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px 10px;
+}
