@@ -33,7 +33,7 @@ passport.use(
                 db.user
                   .create({ userName: username, password: hashedPassword })
                   .then(user => {
-                    console.log('user created');
+                    // console.log('user created');
                     return done(null, user);
                   })
                   .catch(err => {
@@ -76,7 +76,7 @@ passport.use(
                     message: 'passwords do not match'
                   });
                 }
-                console.log('user found & authenticated');
+                // console.log('user found & authenticated');
                 return done(null, user);
               });
             }
@@ -105,7 +105,7 @@ passport.use(
         })
         .then(user => {
           if (user) {
-            console.log('user found in db in passport');
+            // console.log('user found in db in passport');
             done(null, user);
           } else {
             console.log('user not found in db in passport');
