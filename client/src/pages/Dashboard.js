@@ -106,6 +106,7 @@ class Dashboard extends Component {
     return (
       <div className='dashboardPage'>
         {dashboardContent}
+        <br /><a href='/reports/create'>Create Report WIP</a>
       </div>
     );
   }
