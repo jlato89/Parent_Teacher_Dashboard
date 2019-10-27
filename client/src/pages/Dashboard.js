@@ -3,11 +3,9 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import Authenticate from '../utils/Authenticate';
 import Header from '../components/Header/Header';
 import Announcements from '../components/Announcement/Announcement';
 import Logo from '../components/Logo/Logo';
-import MenuBtn from '../components/MenuBtn/MenuBtn';
 import styles from './Dashboard.module.css';
 
 class Dashboard extends Component {
@@ -26,7 +24,7 @@ class Dashboard extends Component {
     //? Check for token in localStorage, if true set default headers
     const token = localStorage.getItem('ptDash');
     const decode = jwt_decode(token);
-    if (Authenticate(token)) {
+    if (token) {
       setAuthToken(token);
       await this.setState({
         user: {
