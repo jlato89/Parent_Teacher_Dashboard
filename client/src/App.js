@@ -5,6 +5,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import NoMatch from './pages/NoMatch';
 
+import CreateReport from './components/Reports/CreateReport/CreateReport';
+
 class App extends Component {
   render() {
     return (
@@ -13,6 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/reports/create' component={CreateReport} />
             <Route component={NoMatch} />
           </Switch>
         </Router>
