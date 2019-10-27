@@ -70,42 +70,46 @@ class Login extends Component {
     }
 
     return (
-      <div className={styles.rootContainer}>
-        <h1 className={styles.header}>PT Dashboard</h1>
-        <center><Logo size='250'/></center>
+      <div className={styles.background}>
+        <div className={styles.container}>
+          <h1 className={styles.header}>PT Dashboard</h1>
+          <center>
+            <Logo size='250' />
+          </center>
 
-        {/* Show error message if error state is true */}
-        {errors && <div className={styles.errors}>{errors}</div>}
+          {/* Show error message if error state is true */}
+          {errors && <div className={styles.errors}>{errors}</div>}
 
-        <form className={styles.form} onSubmit={this.onSubmit}>
-          <div>
-            <label>Username</label>
-            <input
-              className={styles.formInput}
-              name='userName'
-              type='Username'
-              value={this.state.userName}
-              onChange={this.onChange}
-            />
-          </div>
-          <div>
-            <label>Password</label>
-            <input
-              className={styles.formInput}
-              autoComplete='password'
-              name='password'
-              type='password'
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-          </div>
-          <p>
-            <input className={styles.submitBtn} type='submit' />
-            <sub>
-              <a href='/resetpsw'>Forgot password?</a>
-            </sub>
-          </p>
-        </form>
+          <form className={styles.form} onSubmit={this.onSubmit}>
+            <div>
+              <label>Username</label>
+              <input
+                className={styles.formInput}
+                name='userName'
+                type='Username'
+                value={this.state.userName}
+                onChange={this.onChange}
+              />
+            </div>
+            <div>
+              <label>Password</label>
+              <input
+                className={styles.formInput}
+                autoComplete='password'
+                name='password'
+                type='password'
+                value={this.state.password}
+                onChange={this.onChange}
+              />
+            </div>
+            <p>
+              <input className={styles.submitBtn} type='submit' />
+              <sub>
+                <a href='/resetpsw'>Forgot password?</a>
+              </sub>
+            </p>
+          </form>
+        </div>
       </div>
     );
   }
