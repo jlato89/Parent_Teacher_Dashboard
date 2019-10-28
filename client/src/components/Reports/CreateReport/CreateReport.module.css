@@ -1,3 +1,22 @@
-.formLabel {
+.formInputTitle {
   display: block;
+}
+.radioBtn {
+  display: inline-block;
+  border: solid 1px black;
+  padding: 5px;
+  margin: 4px;
+}
+.radioBtn:active {
+  background-color: green;
+}
+.radioBtn .hidden {
+  display: none;
+}
+.errors {
+  background-color: red;
+  font-weight: bold;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 5px 10px;
 }
