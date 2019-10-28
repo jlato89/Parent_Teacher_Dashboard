@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NoMatch() {
+const  NoMatch = props => {
   return (
     <div className='noMatchPage'>
       <h2>Error, No route found!</h2>

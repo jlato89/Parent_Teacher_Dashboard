@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Menu() {
+const Menu = props => {
   return (
     <div className='menu'>
       {/* Placeholder Ideas for Menu */}

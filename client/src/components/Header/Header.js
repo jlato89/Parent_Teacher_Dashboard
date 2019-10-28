@@ -15,7 +15,7 @@ if (curHr < 12) {
   greetingMsg = 'Good Evening';
 }
 
-function Header(props) {
+const Header = props => {
   let profileImg = props.profileImg;
   let miniHeader;
   let leftBtn;
