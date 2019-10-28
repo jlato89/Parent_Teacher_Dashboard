@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import Header from '../components/Header/Header';
+import Layout from '../components/Layout/Layout';
 import Announcements from '../components/Announcement/Announcement';
 import Logo from '../components/Logo/Logo';
 import styles from './Dashboard.module.css';
@@ -16,7 +16,8 @@ class Dashboard extends Component {
       loading: true,
       user: {},
       eventArr: [],
-      studentArr: []
+      studentArr: [],
+      reportArr: []
     };
   }
 
@@ -96,19 +97,17 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <>
-          <Header profileImg={user.profileImage} name={user.firstName} />
-          <Announcements announcements={announcements} />
-          <button onClick={this.handleLogout}>Logout</button>
+          <Layout profileImg={user.profileImage} name={user.firstName}>
+            <Announcements announcements={announcements} />
+            <button onClick={this.handleLogout}>Logout</button>
+            <br />
+            <a href='/reports/create'>Create Report WIP</a>
+          </Layout>
         </>
       );
     }
 
-    return (
-      <div className='dashboardPage'>
-        {dashboardContent}
-        <br /><a href='/reports/create'>Create Report WIP</a>
-      </div>
-    );
+    return <div className='dashboardPage'>{dashboardContent}</div>;
   }
 }
 
