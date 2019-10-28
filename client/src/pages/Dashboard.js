@@ -24,9 +24,9 @@ class Dashboard extends Component {
   async componentDidMount() {
     //? Check for token in localStorage, if true set default headers
     const token = localStorage.getItem('ptDash');
-    const decode = jwt_decode(token);
     if (token) {
       setAuthToken(token);
+      const decode = jwt_decode(token);
       await this.setState({
         user: {
           id: decode.id,
