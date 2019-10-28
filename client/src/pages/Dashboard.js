@@ -5,6 +5,7 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import Layout from '../components/Layout/Layout';
 import Announcements from '../components/Announcement/Announcement';
+import MenuBtn from '../components/MenuBtn/MenuBtn';
 import Logo from '../components/Logo/Logo';
 import styles from './Dashboard.module.css';
 
@@ -97,12 +98,16 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <>
-          <Layout profileImg={user.profileImage} name={user.firstName}>
+          <Layout 
+            profileImg={user.profileImage} 
+            name={user.firstName}>
             <Announcements announcements={announcements} />
+            <MenuBtn name='Create Report' link='/reports/create' />
+            {/* <MenuBtn name='Students' link='/students' /> */}
+          </Layout>
             <button onClick={this.handleLogout}>Logout</button>
             <br />
             <a href='/reports/create'>Create Report WIP</a>
-          </Layout>
         </>
       );
     }
