@@ -6,6 +6,8 @@ import jwt_decode from 'jwt-decode';
 import Layout from '../components/Layout/Layout';
 import Announcements from '../components/Announcement/Announcement';
 import DashBtns from '../components/DashBtns/DashBtns';
+import Events from '../components/Events/Events';
+
 import Logo from '../components/Logo/Logo';
 import styles from './Dashboard.module.css';
 
@@ -128,6 +130,7 @@ class Dashboard extends Component {
           <Layout profileImg={user.profileImage} name={user.firstName}>
             <Announcements announcements={announcements} />
             <DashBtns dashBtns={this.state.dashBtns} />
+            <Events events={this.state.eventArr}/>
           </Layout>
           <button onClick={this.handleLogout}>Logout</button>
         </>
