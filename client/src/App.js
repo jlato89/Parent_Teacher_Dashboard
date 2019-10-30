@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import NoMatch from './pages/NoMatch';
+import NoMatch from './components/NoMatch/NoMatch';
 
 import CreateReport from './components/Reports/CreateReport/CreateReport';
 
