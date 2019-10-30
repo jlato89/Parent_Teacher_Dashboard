@@ -20,6 +20,7 @@ const Event = props => {
   }
   return (
     <div>
+      <p className={styles.headerText}>Upcoming Events</p>
       {events}
     </div>
   )
