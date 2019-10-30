@@ -5,7 +5,7 @@ import setAuthToken from '../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
 import Layout from '../components/Layout/Layout';
 import Announcements from '../components/Announcement/Announcement';
-import MenuBtn from '../components/MenuBtn/MenuBtn';
+import DashBtns from '../components/DashBtns/DashBtns';
 import Logo from '../components/Logo/Logo';
 import styles from './Dashboard.module.css';
 
@@ -19,14 +19,30 @@ class Dashboard extends Component {
       eventArr: [],
       studentArr: [],
       reportArr: [],
-      dashLinks: [
+      dashBtns: [
         {
-          name: 'Create Student',
+          name: 'Create Report',
           url: '/reports/create'
         },
         {
-          name: 'Create Student2',
-          url: '/reports/create'
+          name: 'Create Incident',
+          url: '/incidents/create'
+        },
+        {
+          name: 'Events',
+          url: '/events'
+        },
+        {
+          name: 'Students',
+          url: '/students'
+        },
+        {
+          name: 'Reports & Incidents',
+          url: 'reports'
+        },
+        {
+          name: 'Your Profile',
+          url: '/profile'
         }
       ]
     };
@@ -83,19 +99,20 @@ class Dashboard extends Component {
 
   render() {
     const { redirect, user } = this.state;
-    let dashboardContent;
-
-    //? Pull announcements from state.eventArr
+    
+    //? Pull any announcements from eventArr
     const announcements = this.state.eventArr.filter(event => {
       return event.isAnnouncement === true;
     });
-
-    //? Redirect to homepage if logout
+    
+    //? Redirect to homepage if logged-out
     if (redirect) {
       return <Redirect to='/' />;
     }
-
+    
+    //? --------------------------------------------------------
     //? Content to render when app is loading
+    let dashboardContent;
     if (this.state.loading) {
       dashboardContent = (
         <div className={styles.container}>
@@ -110,7 +127,7 @@ class Dashboard extends Component {
         <>
           <Layout profileImg={user.profileImage} name={user.firstName}>
             <Announcements announcements={announcements} />
-            <MenuBtn dashLinks={this.state.dashLinks} />
+            <DashBtns dashBtns={this.state.dashBtns} />
           </Layout>
           <button onClick={this.handleLogout}>Logout</button>
         </>
