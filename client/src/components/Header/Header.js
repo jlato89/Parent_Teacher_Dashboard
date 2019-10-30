@@ -1,11 +1,13 @@
 import React from 'react';
+import Moment from 'react-moment';
 import MailIcon from '../../assets/images/outline_mail_white_24.png';
 import SearchIcon from '../../assets/images/outline_search_white_24.png';
 import HomeIcon from '../../assets/images/outline_home_white_18dp.png';
 import ProfileImgDefault from '../../assets/images/outline_account_circle_white_48.png';
 import styles from './Header.module.css';
 
-const curHr = new Date().getHours();
+const date = new Date();
+const curHr = date.getHours();
 let greetingMsg;
 if (curHr < 12) {
   greetingMsg = 'Good Morning';
@@ -72,7 +74,9 @@ const Header = props => {
           <p>
             <span className={styles.bold}>Hi {props.name},</span> {greetingMsg}
           </p>
-          <p>Today, 14 Nov 2019</p>
+          <p>
+            <Moment format='ddd, MMM Do YYYY' date={date} />
+          </p>
         </div>
       )}
     </div>
