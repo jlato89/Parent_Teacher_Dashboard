@@ -1,7 +1,3 @@
-.container {
-  display: flex;
-  justify-content: space-between;
-}
 .menuBtn {
   background-color: darkgrey;
   height: 120px;
