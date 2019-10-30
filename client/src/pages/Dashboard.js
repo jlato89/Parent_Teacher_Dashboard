@@ -101,12 +101,7 @@ class Dashboard extends Component {
 
   render() {
     const { redirect, user } = this.state;
-    
-    //? Pull any announcements from eventArr
-    const announcements = this.state.eventArr.filter(event => {
-      return event.isAnnouncement === true;
-    });
-    
+        
     //? Redirect to homepage if logged-out
     if (redirect) {
       return <Redirect to='/' />;
@@ -128,7 +123,7 @@ class Dashboard extends Component {
       dashboardContent = (
         <>
           <Layout profileImg={user.profileImage} name={user.firstName}>
-            <Announcements announcements={announcements} />
+            <Announcements events={this.state.eventArr} />
             <DashBtns dashBtns={this.state.dashBtns} />
             <Events events={this.state.eventArr}/>
           </Layout>
