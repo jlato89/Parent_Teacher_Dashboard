@@ -18,7 +18,17 @@ class Dashboard extends Component {
       user: {},
       eventArr: [],
       studentArr: [],
-      reportArr: []
+      reportArr: [],
+      dashLinks: [
+        {
+          name: 'Create Student',
+          url: '/reports/create'
+        },
+        {
+          name: 'Create Student2',
+          url: '/reports/create'
+        }
+      ]
     };
   }
 
@@ -98,16 +108,11 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <>
-          <Layout 
-            profileImg={user.profileImage} 
-            name={user.firstName}>
+          <Layout profileImg={user.profileImage} name={user.firstName}>
             <Announcements announcements={announcements} />
-            <MenuBtn name='Create Report' link='/reports/create' />
-            {/* <MenuBtn name='Students' link='/students' /> */}
+            <MenuBtn dashLinks={this.state.dashLinks} />
           </Layout>
-            <button onClick={this.handleLogout}>Logout</button>
-            <br />
-            <a href='/reports/create'>Create Report WIP</a>
+          <button onClick={this.handleLogout}>Logout</button>
         </>
       );
     }
