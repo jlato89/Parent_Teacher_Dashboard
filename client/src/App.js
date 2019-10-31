@@ -5,7 +5,7 @@ import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import NoMatch from './components/NoMatch/NoMatch';
 
-import CreateReport from './pages/CreateReport/CreateReport';
+import CreateReport from './pages/Reports/CreateReport/CreateReport';
 
 class App extends Component {
   render() {
