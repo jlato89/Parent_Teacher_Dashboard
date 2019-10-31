@@ -1,7 +1,7 @@
 const db = require('../../models');
 
 module.exports = app => {
-  app.get('/findStudent', (req, res) => {
+  app.get('/api/findStudent', (req, res) => {
     db.student
       .findAll({})
       .then(student => {

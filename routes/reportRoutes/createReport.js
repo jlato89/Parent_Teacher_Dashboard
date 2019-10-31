@@ -1,7 +1,7 @@
 const db = require('../../models');
 
 module.exports = app => {
-  app.post('/reports/createReport', (req, res) => {
+  app.post('/api/createReport', (req, res) => {
     db.report
       .create(req.body)
       .then(response => {

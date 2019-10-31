@@ -40,7 +40,7 @@ class Login extends Component {
     };
 
     axios
-      .post('/loginUser', userData)
+      .post('/api/loginUser', userData)
       .then(response => {
         if(response.data.token) {
           const { token } = response.data

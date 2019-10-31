@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import isEmpty from '../../../validation/is-empty';
-import Header from '../../Header/Header';
+import isEmpty from '../validation/is-empty';
+import Header from '../components/Header/Header';
 import styles from './CreateReport.module.css';
 
 class CreateReport extends Component {
@@ -53,7 +53,7 @@ class CreateReport extends Component {
       };
 
       axios
-        .post('/reports/createReport', reportObj)
+        .post('/api/createReport', reportObj)
         .then(response => {
           console.log(response.data);
         })

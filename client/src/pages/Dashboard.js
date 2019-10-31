@@ -24,11 +24,11 @@ class Dashboard extends Component {
       dashBtns: [
         {
           name: 'Create Report',
-          url: '/reports/create'
+          url: '/createReport'
         },
         {
           name: 'Create Incident',
-          url: '/incidents/create'
+          url: '/createIncident'
         },
         {
           name: 'Events',
@@ -40,7 +40,7 @@ class Dashboard extends Component {
         },
         {
           name: 'Reports & Incidents',
-          url: 'reports'
+          url: '/reports'
         },
         {
           name: 'Your Profile',
@@ -65,17 +65,17 @@ class Dashboard extends Component {
     }
 
     //? Check if parent, if true grab students associated with the user ID
-    let findStudent = '/findStudent';
+    let findStudent = '/api/findStudent';
     if (this.state.user.userType === 'parent') {
       console.log('User is parent');
-      findStudent = `/findStudent/${this.state.user.id}`;
+      findStudent = `/api/findStudent/${this.state.user.id}`;
     }
 
     //? Run all calls for info that needs to be retrieved.
     axios
       .all([
-        axios.get('/findUser'),
-        axios.get('/findEvent'),
+        axios.get('/api/findUser'),
+        axios.get('/api/findEvent'),
         axios.get(findStudent)
       ])
       .then(

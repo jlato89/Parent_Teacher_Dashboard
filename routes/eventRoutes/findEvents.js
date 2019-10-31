@@ -1,7 +1,7 @@
 const db = require('../../models');
 
 module.exports = app => {
-  app.get('/findEvent', (req, res) => {
+  app.get('/api/findEvent', (req, res) => {
     db.event.findAll({})
       .then(events => {
         // console.log(events);

@@ -2,7 +2,7 @@ const db = require('../../models');
 const passport = require('passport');
 
 module.exports = app => {
-  app.post('/registerUser', (req, res, next) => {
+  app.post('/api/registerUser', (req, res, next) => {
     passport.authenticate('register', (err, user, info) => {
       if (err) {
         console.log(err);
