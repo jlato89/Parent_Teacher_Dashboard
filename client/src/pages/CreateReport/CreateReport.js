@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import isEmpty from '../validation/is-empty';
-import Header from '../components/Header/Header';
+import isEmpty from '../../validation/is-empty';
+import Header from '../../components/Header/Header';
 import styles from './CreateReport.module.css';
 
 class CreateReport extends Component {

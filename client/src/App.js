@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard/Dashboard';
 import NoMatch from './components/NoMatch/NoMatch';
 
-import CreateReport from './pages/CreateReport';
+import CreateReport from './pages/CreateReport/CreateReport';
 
 class App extends Component {
   render() {
@@ -15,7 +15,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={Login} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/reports/create' component={CreateReport} />
+            <Route exact path='/createReport' component={CreateReport} />
             <Route component={NoMatch} />
           </Switch>
         </Router>

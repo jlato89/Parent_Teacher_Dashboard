@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import axios from 'axios';
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from '../../utils/setAuthToken';
 import jwt_decode from 'jwt-decode';
-import Layout from '../components/Layout/Layout';
-import Announcements from '../components/Announcement/Announcement';
-import DashBtns from '../components/DashBtns/DashBtns';
-import Events from '../components/Events/Events';
+import Layout from '../../components/Layout/Layout';
+import Announcements from '../../components/Announcement/Announcement';
+import DashBtns from '../../components/DashBtns/DashBtns';
+import Events from '../../components/Events/Events';
 
-import Logo from '../components/Logo/Logo';
+import Logo from '../../components/Logo/Logo';
 import styles from './Dashboard.module.css';
 
 class Dashboard extends Component {

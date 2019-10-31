@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Redirect} from 'react-router-dom';
-import Authenticate from '../utils/Authenticate';
+import Authenticate from '../../utils/Authenticate';
 import styles from './Login.module.css';
-import Logo from '../components/Logo/Logo';
+import Logo from '../../components/Logo/Logo';
 
 class Login extends Component {
   constructor() {
