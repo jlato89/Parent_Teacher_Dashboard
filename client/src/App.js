@@ -6,20 +6,20 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import NoMatch from './components/NoMatch/NoMatch';
 
 import CreateReport from './pages/Reports/CreateReport/CreateReport';
+import Students from './pages/Students/Students';
 
 class App extends Component {
   render() {
     return (
-      <>
-        <Router>
-          <Switch>
-            <Route exact path='/' component={Login} />
-            <PrivateRoute exact path='/dashboard' component={Dashboard} />
-            <Route exact path='/createReport' component={CreateReport} />
-            <Route component={NoMatch} />
-          </Switch>
-        </Router>
-      </>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={Login} />
+          <PrivateRoute exact path='/dashboard' component={Dashboard} />
+          <PrivateRoute exact path='/createReport' component={CreateReport} />
+          <PrivateRoute exact path='/students' component={Students} />
+          <Route component={NoMatch} />
+        </Switch>
+      </Router>
     );
   }
 }
