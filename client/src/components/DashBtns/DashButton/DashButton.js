@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styles from './DashButton.module.css';
 
 const DashButton = props => {
   return props.buttons.map(link => (
-    <a className={styles.menuBtn} key={link.name} href={link.url}>
+    <Link className={styles.menuBtn} key={link.name} to={link.url}>
       <span className={styles.menuBtnTitle}>{link.name}</span>
-    </a>
+    </Link>
   ));
 };
 
