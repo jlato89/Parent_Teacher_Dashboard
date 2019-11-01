@@ -4,9 +4,9 @@ import axios from 'axios';
 import setAuthToken from '../../utils/setAuthToken';
 // import jwt_decode from 'jwt-decode';
 import Layout from '../../components/Layout/Layout';
-import Announcements from '../../components/Announcement/Announcement';
+import Announcements from '../../components/Events/Announcement/Announcement';
 import DashBtns from '../../components/DashBtns/DashBtns';
-import Events from '../../components/Events/Events';
+import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvents';
 
 import Logo from '../../components/Logo/Logo';
 import styles from './Dashboard.module.css';
@@ -19,7 +19,6 @@ class Dashboard extends Component {
       loading: true,
       user: {},
       eventArr: [],
-      studentArr: [],
       reportArr: [],
       dashBtns: [
         {
@@ -72,8 +71,8 @@ class Dashboard extends Component {
       ])
       .then(
         axios.spread((userData, eventData) => {
-          console.log('User:', userData.data.user);
-          console.log('Events:', eventData.data);
+          console.log('Current User:', userData.data.user);
+          console.log('All Events:', eventData.data);
           this.setState({
             user: userData.data.user,
             eventArr: eventData.data,
@@ -115,7 +114,7 @@ class Dashboard extends Component {
           <Layout profileImg={user.profileImage} name={user.firstName}>
             <Announcements events={this.state.eventArr} />
             <DashBtns dashBtns={this.state.dashBtns} />
-            <Events events={this.state.eventArr} />
+            <UpcomingEvents events={this.state.eventArr} />
           </Layout>
           <button onClick={this.handleLogout}>Logout</button>
         </>
