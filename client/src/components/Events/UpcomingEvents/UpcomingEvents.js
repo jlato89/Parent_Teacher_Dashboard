@@ -3,12 +3,14 @@ import Moment from 'react-moment';
 import styles from './UpcomingEvents.module.css';
 
 const UpcomingEvents = props => {
+  let events = null;
   const eventArr = props.events.filter(event => {
-    return event.isAnnouncement === false;
+    const dateNow = new Date();
+    const eventDate = new Date(event.eventDate);
+    return dateNow <= eventDate && event.isAnnouncement === false;
   });
 
-  let events = null;
-  if (eventArr) {
+  if (eventArr.length !== 0) {
     events = (
       <div className={styles.container}>
         <p className={styles.headerText}>Upcoming Events</p>
