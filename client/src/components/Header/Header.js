@@ -3,6 +3,8 @@ import Moment from 'react-moment';
 import MailIcon from '../../assets/images/outline_mail_white_24.png';
 import SearchIcon from '../../assets/images/outline_search_white_24.png';
 import HomeIcon from '../../assets/images/outline_home_white_18dp.png';
+import MenuBtn from '../../assets/images/outline_menu_white_24.png';
+import LogoutIcon from '../../assets/images/outline_directions_run_white_18dp.png';
 import ProfileImgDefault from '../../assets/images/outline_account_circle_white_48.png';
 import styles from './Header.module.css';
 
@@ -18,69 +20,62 @@ if (curHr < 12) {
 }
 
 const Header = props => {
-  let profileImg = props.profileImg;
   let miniHeader;
-  let leftBtn;
-  let rightBtn;
-
-  if (!props.profileImg) {
-    profileImg = ProfileImgDefault;
-  }
-  //? Check if miniHeader is true
-  if (props.miniHeader) {
-    miniHeader = true;
-    leftBtn = (
-      <a href='/dashboard'>
-        <img src={HomeIcon} alt='Home Icon' height='30px' />
-      </a>
-    );
-    rightBtn = (
-      <a href='/search'>
-        <img src={SearchIcon} alt='Search Icon' height='30px' />
-      </a>
-    );
-  } else {
-    miniHeader = false;
-    leftBtn = (
-      <a href='/mail'>
-        <img src={MailIcon} alt='Mail Icon' height='30px' />
-      </a>
-    );
-    rightBtn = (
-      <a href='/search'>
-        <img src={SearchIcon} alt='Search Icon' height='30px' />
-      </a>
-    );
-  }
 
   return (
     <div className={styles.container}>
       <div className={styles.topHeader}>
-        {leftBtn}
-        {miniHeader && (
-          <span className={styles.topHeaderText}>{props.title}</span>
+        {/* Left Button */}
+        {miniHeader ? (
+          <a href='/dashboard'>
+            <img src={HomeIcon} alt='Home' height='30px' />
+          </a>
+        ) : (
+          <a href='/mail'>
+            <img src={MailIcon} alt='Mail' height='30px' />
+          </a>
         )}
-        {!miniHeader && (
+        {/* Title */}
+        {miniHeader ? (
+          <span className={styles.topHeaderText}>
+            {props.title ? props.title : 'PT Dashboard'}
+          </span>
+        ) : (
           <img
             className={styles.profileImg}
-            src={profileImg}
+            src={props.profileImg ? props.profileImg : ProfileImgDefault}
             alt='Profile Img'
           />
         )}
-        {rightBtn}
+        {/* Right Button */}
+        {miniHeader ? (
+          <img src={MenuBtn} alt='Menu' height='30px' />
+        ) : (
+          <a href='/search'>
+            <img src={SearchIcon} alt='Search' height='30px' />
+          </a>
+        )}
       </div>
+      {/* Bottom Header */}
       {!miniHeader && (
         <div className={styles.bottomHeaderText}>
           <p>
-            <span className={styles.bold}>Hi {props.name},</span> {greetingMsg}
+            <strong>Hi {props.name},</strong> {greetingMsg}
           </p>
           <p>
             <Moment format='ddd, MMM Do YYYY' date={date} />
+            <img
+              src={LogoutIcon}
+              alt='Logout'
+              height='30px'
+              style={{ float: 'right' }}
+              onClick={props.onClickLogout}
+            />
           </p>
         </div>
       )}
     </div>
   );
-}
+};
 
 export default Header;

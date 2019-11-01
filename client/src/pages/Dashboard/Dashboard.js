@@ -111,12 +111,15 @@ class Dashboard extends Component {
     else {
       dashboardContent = (
         <>
-          <Layout profileImg={user.profileImage} name={user.firstName}>
+          <Layout
+            onClickLogout={this.handleLogout}
+            profileImg={user.profileImage}
+            name={user.firstName}
+          >
             <Announcements events={this.state.eventArr} />
             <DashBtns dashBtns={this.state.dashBtns} />
             <UpcomingEvents events={this.state.eventArr} />
           </Layout>
-          <button onClick={this.handleLogout}>Logout</button>
         </>
       );
     }
