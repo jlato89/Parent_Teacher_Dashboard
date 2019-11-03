@@ -20,7 +20,7 @@ if (curHr < 12) {
 }
 
 const Header = props => {
-  let miniHeader;
+  let miniHeader = props.miniHeader;
 
   return (
     <div className={styles.container}>
