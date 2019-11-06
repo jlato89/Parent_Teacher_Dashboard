@@ -14,7 +14,7 @@ module.exports = app => {
       })
       .catch(err => {
         console.log(err);
-        res.status(500).json({ msg: 'There was an error' });
+        res.status(400).json({ msg: 'There was an error' });
       });
   });
 };
