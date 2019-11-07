@@ -7,7 +7,7 @@ import Layout from '../../components/Layout/Layout';
 import Announcements from '../../components/Events/Announcement/Announcement';
 import DashBtns from '../../components/DashBtns/DashBtns';
 import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvents';
-
+import Spinner from 'react-bootstrap/Spinner';
 import Logo from '../../components/Logo/Logo';
 import styles from './Dashboard.module.css';
 
@@ -102,8 +102,10 @@ class Dashboard extends Component {
     if (this.state.loading) {
       dashboardContent = (
         <div className={styles.container}>
-          <h2>Loading...</h2>
           <Logo />
+          <Spinner animation='border' role='status'>
+            <span className='sr-only'>Loading...</span>
+          </Spinner>
         </div>
       );
     }
