@@ -3,6 +3,7 @@ import axios from 'axios';
 import isEmpty from '../../../validation/is-empty';
 import Header from '../../../components/Header/Header';
 import MyModal from '../../../components/MyModal/MyModal';
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 
 import styles from './CreateReport.module.css';
@@ -76,7 +77,7 @@ class CreateReport extends Component {
       <div>
         <Header miniHeader={true} title='Create Report' />
         {/* Show error message if error state is true */}
-        {errors && <div className={styles.errors}>{errors}</div>}
+        {errors && <Alert variant='danger'>{errors}</Alert>}
         <form onSubmit={this.onSubmit}>
           <label className={styles.formInputTitle}>Name*</label>
           <input
@@ -189,7 +190,7 @@ class CreateReport extends Component {
           <Button
             type='submit'
             variant='primary'
-            onClick={errors ? null : this.handleModalShow}
+            onClick={!errors ? null : this.handleModalShow}
           >
             Submit
           </Button>
