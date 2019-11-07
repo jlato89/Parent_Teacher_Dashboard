@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import isEmpty from '../../../validation/is-empty';
 import Header from '../../../components/Header/Header';
+import MyModal from '../../../components/MyModal/MyModal';
+import Button from 'react-bootstrap/Button';
+
 import styles from './CreateReport.module.css';
 
 class CreateReport extends Component {
@@ -9,6 +12,7 @@ class CreateReport extends Component {
     super();
     this.state = {
       redirect: false,
+      showModal: false,
       errors: '',
       name: '',
       date: '',
@@ -22,6 +26,9 @@ class CreateReport extends Component {
     };
   }
 
+  handleModalClose = () => this.setState({ showModal: false });
+  handleModalShow = () => this.setState({ showModal: true });
+
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -31,10 +38,7 @@ class CreateReport extends Component {
   onSubmit = e => {
     e.preventDefault();
 
-    if (
-      isEmpty(this.state.name) ||
-      isEmpty(this.state.date)
-    ) {
+    if (isEmpty(this.state.name) || isEmpty(this.state.date)) {
       this.setState({
         errors: 'Please fill out missing fields!'
       });
@@ -73,7 +77,6 @@ class CreateReport extends Component {
         <Header miniHeader={true} title='Create Report' />
         {/* Show error message if error state is true */}
         {errors && <div className={styles.errors}>{errors}</div>}
-
         <form onSubmit={this.onSubmit}>
           <label className={styles.formInputTitle}>Name*</label>
           <input
@@ -183,8 +186,23 @@ class CreateReport extends Component {
             onChange={this.onChange}
           />
           <br />
-          <input type='submit' />
+          <Button
+            type='submit'
+            variant='primary'
+            onClick={errors ? null : this.handleModalShow}
+          >
+            Submit
+          </Button>
         </form>
+
+        {/* MODAL CONTAINER */}
+        <MyModal
+          handleModalClose={this.handleModalClose}
+          showModal={this.state.showModal}
+          title='Create Report'
+        >
+          Report submitted successfully.
+        </MyModal>
       </div>
     );
   }
