@@ -36,6 +36,7 @@ require('./routes/userRoutes/deleteUser')(app);
 require('./routes/userRoutes/updateUser')(app);
 require('./routes/eventRoutes/findEvents')(app);
 require('./routes/studentRoutes/findStudents')(app);
+require('./routes/studentRoutes/createStudent')(app);
 require('./routes/reportRoutes/createReport')(app);
 require('./routes/reportRoutes/findReports')(app);
 require('./routes/incidentRoutes/createIncident')(app);

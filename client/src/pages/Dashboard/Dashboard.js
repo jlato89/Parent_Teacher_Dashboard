@@ -26,8 +26,8 @@ class Dashboard extends Component {
           url: '/createReport'
         },
         {
-          name: 'Create Incident',
-          url: '/createIncident'
+          name: 'Add Students',
+          url: '/createStudent'
         },
         {
           name: 'Events',
@@ -38,7 +38,7 @@ class Dashboard extends Component {
           url: '/students'
         },
         {
-          name: 'Reports & Incidents',
+          name: 'Reports',
           url: '/reports'
         },
         {
