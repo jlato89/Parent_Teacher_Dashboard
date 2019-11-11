@@ -37,6 +37,9 @@ require('./routes/userRoutes/updateUser')(app);
 require('./routes/eventRoutes/findEvents')(app);
 require('./routes/studentRoutes/findStudents')(app);
 require('./routes/reportRoutes/createReport')(app);
+require('./routes/reportRoutes/findReports')(app);
+require('./routes/incidentRoutes/createIncident')(app);
+require('./routes/incidentRoutes/findIncidents')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
