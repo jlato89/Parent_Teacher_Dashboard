@@ -8,6 +8,7 @@ import NoMatch from './components/NoMatch/NoMatch';
 import CreateReport from './pages/Reports/CreateReport/CreateReport';
 import Students from './pages/Students/Students';
 import EventList from './pages/EventList/EventList';
+import Reports from './pages/Reports/Reports';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <PrivateRoute exact path='/createReport' component={CreateReport} />
           <PrivateRoute exact path='/students' component={Students} />
           <PrivateRoute exact path='/events' component={EventList} />
+          <PrivateRoute exact path='/reports' component={Reports} />
 
           <Route component={NoMatch} />
         </Switch>
