@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import axios from 'axios';
+import axios from 'axios';
 // import isEmpty from '../../../validation/is-empty';
 import Header from '../../../components/Header/Header';
 import MyModal from '../../../components/MyModal/MyModal';
@@ -39,38 +39,54 @@ class CreateStudent extends Component {
     });
   };
 
-  // onSubmit = e => {
-  //   e.preventDefault();
+  onSubmit = e => {
+    e.preventDefault();
+    const { mothersName, lastName, phone} = this.state
 
-  //   if (isEmpty(this.state.name) || isEmpty(this.state.date)) {
-  //     this.setState({
-  //       errors: 'Please fill out missing fields!'
-  //     });
-  //   } else {
-  //     this.setState({ errors: '' });
-  //     console.log('No errors');
-  //     const = {
-  //       firstName: this.state.firstName,
-  //       lastName: this.state.lastName,
-  //       birthdate: this.state.birthdate,
-  //       gender: this.state.gender,
-  //       allergies: this.state.allergies,
-  //       medical: this.state.medical,
-  //     };
+    const userName = mothersName.charAt(0) + lastName;
+    console.log('userName combined: ', userName.toLowerCase());
+    const password = lastName.slice(0,4) + phone.slice(-4);
+    console.log('password created: ', password.toLowerCase());
 
-  //     axios
-  //       .post('/api/CreateStudent', reportObj)
-  //       .then(response => {
-  //         console.log(response.data);
-  //       })
-  //       .catch(err => {
-  //         console.log(err.response.data);
-  //         this.setState({
-  //           errors: err.response.data
-  //         });
-  //       });
-  //   }
-  // };
+    const parentObj = {
+      firstName: this.state.mothersName,
+      firstName2: this.state.fathersName,
+      lastName: this.state.lastName,
+      email: this.state.email,
+      userName: userName.toLowerCase(),
+      password: password.toLowerCase(),
+      phone: this.state.phone,
+      address: this.state.address
+    };
+    const studentObj = {
+      firstName: this.state.childsName,
+      lastName: this.state.lastName,
+      birthdate: this.state.birthdate,
+      gender: this.state.gender,
+      allergies: this.state.allergies,
+      medical: this.state.medical
+    };
+    console.log(parentObj);
+
+    axios
+      .post('/api/registerUser', parentObj)
+      .then(parent => {
+        console.log('[axios]parent: ', parent.data);
+        studentObj.parentId = parent.data.userId;
+        console.log('studentObj', studentObj);
+
+        return axios.post("/api/createStudent", studentObj);
+      })
+      .then(student => {
+        console.log('[axios]student: ', student.data);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({
+          errors: err.response.data
+        });
+      });
+  };
 
   render() {
     const { errors } = this.state;
@@ -89,7 +105,7 @@ class CreateStudent extends Component {
             value={this.state.mothersName}
             onChange={this.onChange}
           />
-          <label className={styles.formInputTitle}>Fathers Name*</label>
+          <label className={styles.formInputTitle}>Fathers Name</label>
           <input
             name='fathersName'
             type='text'
@@ -103,7 +119,7 @@ class CreateStudent extends Component {
             value={this.state.lastName}
             onChange={this.onChange}
           />
-          <label className={styles.formInputTitle}>Email*</label>
+          <label className={styles.formInputTitle}>Email</label>
           <input
             name='email'
             type='text'
@@ -181,9 +197,9 @@ class CreateStudent extends Component {
         <MyModal
           handleModalClose={this.handleModalClose}
           showModal={this.state.showModal}
-          title='Create Report'
+          title='Add Student'
         >
-          Report submitted successfully.
+          Submitted successfully.
         </MyModal>
       </div>
     );

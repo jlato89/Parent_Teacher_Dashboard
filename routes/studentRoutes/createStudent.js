@@ -7,7 +7,7 @@ module.exports = app => {
       .then(response => {
         console.log(response.dataValues);
         res.status(200).send({
-          message: 'Student(s) @ Parent Added'
+          message: 'Student(s) Added'
         });
       })
       .catch(err => {

@@ -22,9 +22,12 @@ module.exports = app => {
               }
             })
             .then(user => {
-              user.update(data).then(() => {
+              user.update(data)
+                .then(user => {
                 console.log('user created in db');
-                res.status(200).send({ message: 'user created' });
+                res.status(200).send({ 
+                  message: 'user created',
+                  userId: user.id });
               });
             });
         });
