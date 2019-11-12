@@ -10,6 +10,7 @@ import Students from './pages/Students/Students';
 import EventList from './pages/EventList/EventList';
 import Reports from './pages/Reports/Reports';
 import CreateStudent from './pages/Students/CreateStudent/CreateStudent';
+import Profile from './pages/Profile/Profile';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
           <PrivateRoute exact path='/createStudent' component={CreateStudent} />
           <PrivateRoute exact path='/events' component={EventList} />
           <PrivateRoute exact path='/reports' component={Reports} />
+          <PrivateRoute exact path='/profile' component={Profile} />
 
           <Route component={NoMatch} />
         </Switch>
