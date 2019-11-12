@@ -5,8 +5,7 @@ import Header from '../../../components/Header/Header';
 import MyModal from '../../../components/MyModal/MyModal';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-
-import styles from './CreateStudent.module.css';
+import Input from '../../../components/Input/Input';
 
 class CreateStudent extends Component {
   constructor() {
@@ -15,37 +14,145 @@ class CreateStudent extends Component {
       redirect: false,
       showModal: false,
       errors: '',
-      mothersName: '',
-      fathersName: '',
-      lastName: '',
-      email: '',
-      phone: '',
-      address: '',
-      childsName: '',
-      birthdate: '',
-      gender: '',
-      allergies: '',
-      medical: ''
+      studentObj: {
+        childsName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Child Name'
+          },
+          value: ''
+        },
+        birthdate: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Birthdate (01/01/2019)'
+          },
+          value: ''
+        },
+        gender: {
+          elementType: 'select',
+          elementConfig: {
+            options: [
+              { value: 'male', displayValue: 'Male' },
+              { value: 'female', displayValue: 'Female' }
+            ]
+          },
+          value: ''
+        },
+        allergies: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Allergies'
+          },
+          value: ''
+        },
+        medical: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Medical'
+          },
+          value: ''
+        }
+      },
+      parentObj: {
+        mothersName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Mothers Name'
+          },
+          value: ''
+        },
+        fathersName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Fathers Name'
+          },
+          value: ''
+        },
+        lastName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Last Name'
+          },
+          value: ''
+        },
+        email: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'email',
+            placeholder: 'Email'
+          },
+          value: ''
+        },
+        phone: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Phone'
+          },
+          value: ''
+        },
+        address: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Address'
+          },
+          value: ''
+        }
+      }
     };
   }
+
+  parentChangedHandler = (e, inputIdentifier) => {
+    const updatedParentObj = {
+      ...this.state.parentObj
+    };
+    const updatedFormElement = {
+      ...updatedParentObj[inputIdentifier]
+    };
+    updatedFormElement.value = e.target.value;
+    updatedParentObj[inputIdentifier] = updatedFormElement;
+
+    this.setState({
+      errors: '',
+      parentObj: updatedParentObj
+    });
+  };
+
+  studentChangedHandler = (e, inputIdentifier) => {
+    const updatedStudentObj = {
+      ...this.state.studentObj
+    };
+    const updatedFormElement = {
+      ...updatedStudentObj[inputIdentifier]
+    };
+    updatedFormElement.value = e.target.value;
+    updatedStudentObj[inputIdentifier] = updatedFormElement;
+
+    this.setState({
+      errors: '',
+      studentObj: updatedStudentObj
+    });
+  };
 
   handleModalClose = () => this.setState({ showModal: false });
   handleModalShow = () => this.setState({ showModal: true });
 
-  onChange = e => {
-    this.setState({
-      errors: '',
-      [e.target.name]: e.target.value
-    });
-  };
-
   onSubmit = e => {
     e.preventDefault();
-    const { mothersName, lastName, phone} = this.state
+    const { mothersName, lastName, phone } = this.state;
 
     const userName = mothersName.charAt(0) + lastName;
     console.log('userName combined: ', userName.toLowerCase());
-    const password = lastName.slice(0,4) + phone.slice(-4);
+    const password = lastName.slice(0, 4) + phone.slice(-4);
     console.log('password created: ', password.toLowerCase());
 
     const parentObj = {
@@ -75,7 +182,7 @@ class CreateStudent extends Component {
         studentObj.parentId = parent.data.userId;
         console.log('studentObj', studentObj);
 
-        return axios.post("/api/createStudent", studentObj);
+        return axios.post('/api/createStudent', studentObj);
       })
       .then(student => {
         console.log('[axios]student: ', student.data);
@@ -90,6 +197,21 @@ class CreateStudent extends Component {
 
   render() {
     const { errors } = this.state;
+    const parrentArr = [];
+    const studentArr = [];
+    for (let key in this.state.parentObj) {
+      parrentArr.push({
+        id: key,
+        config: this.state.parentObj[key]
+      });
+    }
+    for (let key in this.state.studentObj) {
+      studentArr.push({
+        id: key,
+        config: this.state.studentObj[key]
+      });
+    }
+
     return (
       <div>
         <Header miniHeader={true} title='Create Report' />
@@ -98,99 +220,35 @@ class CreateStudent extends Component {
 
         {/* PARENT FORM */}
         <form onSubmit={this.onSubmit}>
-          <label className={styles.formInputTitle}>Mothers Name*</label>
-          <input
-            name='mothersName'
-            type='text'
-            value={this.state.mothersName}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Fathers Name</label>
-          <input
-            name='fathersName'
-            type='text'
-            value={this.state.fathersName}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Last Name*</label>
-          <input
-            name='lastName'
-            type='text'
-            value={this.state.lastName}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Email</label>
-          <input
-            name='email'
-            type='text'
-            value={this.state.email}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Phone*</label>
-          <input
-            name='phone'
-            type='text'
-            value={this.state.phone}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Address*</label>
-          <input
-            name='address'
-            type='text'
-            value={this.state.address}
-            onChange={this.onChange}
-          />
-        </form>
+          {parrentArr.map(formElement => (
+            <Input
+              key={formElement.id}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              changed={e => this.parentChangedHandler(e, formElement.id)}
+            />
+          ))}
 
         {/* STUDENT FORM */}
         <hr />
-        <form onSubmit={this.onSubmit}>
-          <label className={styles.formInputTitle}>Childs Name*</label>
-          <input
-            name='childsName'
-            type='text'
-            value={this.state.childsName}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Birthdate*</label>
-          <input
-            name='birthdate'
-            type='date'
-            value={this.state.birthdate}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Gender*</label>
-          <select
-            name='gender'
-            value={this.state.gender}
-            onChange={this.onChange}
-          >
-            <option value='default'>Choose</option>
-            <option value='male'>Male</option>
-            <option value='female'>Female</option>
-          </select>
-          <label className={styles.formInputTitle}>Allergies*</label>
-          <input
-            name='allergies'
-            type='text'
-            value={this.state.allergies}
-            onChange={this.onChange}
-          />
-          <label className={styles.formInputTitle}>Medical?</label>
-          <input
-            name='medical'
-            type='text'
-            value={this.state.medical}
-            onChange={this.onChange}
-          />
-          <br />
-          <Button
-            type='submit'
-            variant='primary'
-            onClick={!errors ? null : this.handleModalShow}
-          >
-            Submit
-          </Button>
+          {studentArr.map(formElement => (
+            <Input
+              key={formElement.id}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              changed={e => this.studentChangedHandler(e, formElement.id)}
+            />
+          ))}
+        <Button
+          style={{margin:'5px 15px'}}
+          type='submit'
+          variant='primary'
+          onClick={!errors ? null : this.handleModalShow}
+        >
+          Submit
+        </Button>
         </form>
 
         {/* MODAL CONTAINER */}
