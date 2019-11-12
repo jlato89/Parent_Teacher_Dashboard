@@ -26,7 +26,7 @@ class CreateStudent extends Component {
         birthdate: {
           elementType: 'input',
           elementConfig: {
-            type: 'text',
+            type: 'text', //! Might need to be changed to DATE
             placeholder: 'Birthdate (01/01/2019)'
           },
           value: ''
@@ -64,7 +64,7 @@ class CreateStudent extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Mothers Name'
+            placeholder: 'First Name*'
           },
           value: ''
         },
@@ -72,7 +72,7 @@ class CreateStudent extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Fathers Name'
+            placeholder: 'First Name(2)'
           },
           value: ''
         },
@@ -80,7 +80,7 @@ class CreateStudent extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Last Name'
+            placeholder: 'Last Name*'
           },
           value: ''
         },
@@ -96,7 +96,7 @@ class CreateStudent extends Component {
           elementType: 'input',
           elementConfig: {
             type: 'text',
-            placeholder: 'Phone'
+            placeholder: 'Phone*'
           },
           value: ''
         },
@@ -199,19 +199,19 @@ class CreateStudent extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, parentObj, studentObj } = this.state;
     const parrentArr = [];
     const studentArr = [];
-    for (let key in this.state.parentObj) {
+    for (let key in parentObj) {
       parrentArr.push({
         id: key,
-        config: this.state.parentObj[key]
+        config: parentObj[key]
       });
     }
-    for (let key in this.state.studentObj) {
+    for (let key in studentObj) {
       studentArr.push({
         id: key,
-        config: this.state.studentObj[key]
+        config: studentObj[key]
       });
     }
 
@@ -251,6 +251,14 @@ class CreateStudent extends Component {
             onClick={!errors ? null : this.handleModalShow}
           >
             Submit
+          </Button>
+          <Button
+            style={{ margin: '5px 15px' }}
+            // type='submit'
+            variant='info'
+            onClick={!errors ? null : this.handleModalShow}
+          >
+            Add Another
           </Button>
         </form>
 
