@@ -6,7 +6,7 @@ const Students = () => {
   const [data, setData] = useState({ studentArr: [] });
 
   useEffect(() => {
-    axios('/api/findStudent')
+    axios('/api/findStudents')
     .then(students => setData({studentArr: students.data}))
   }, []);
   console.log(data.studentArr);
