@@ -15,7 +15,7 @@ class CreateStudent extends Component {
       showModal: false,
       errors: '',
       studentObj: {
-        childsName: {
+        firstName: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
@@ -35,6 +35,7 @@ class CreateStudent extends Component {
           elementType: 'select',
           elementConfig: {
             options: [
+              { value: 'gender', displayValue: 'Gender' },
               { value: 'male', displayValue: 'Male' },
               { value: 'female', displayValue: 'Female' }
             ]
@@ -59,7 +60,7 @@ class CreateStudent extends Component {
         }
       },
       parentObj: {
-        mothersName: {
+        firstName: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
@@ -67,7 +68,7 @@ class CreateStudent extends Component {
           },
           value: ''
         },
-        fathersName: {
+        firstName2: {
           elementType: 'input',
           elementConfig: {
             type: 'text',
@@ -148,41 +149,43 @@ class CreateStudent extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const { mothersName, lastName, phone } = this.state;
+    const { parentObj, studentObj } = this.state;
 
-    const userName = mothersName.charAt(0) + lastName;
-    console.log('userName combined: ', userName.toLowerCase());
-    const password = lastName.slice(0, 4) + phone.slice(-4);
-    console.log('password created: ', password.toLowerCase());
+    const newParentObj = Object.keys(parentObj)
+      .reduce((obj, key) => {
+        obj[key] = parentObj[key].value;
+        return obj;
+      }, {});
+    console.log(newParentObj);
 
-    const parentObj = {
-      firstName: this.state.mothersName,
-      firstName2: this.state.fathersName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      userName: userName.toLowerCase(),
-      password: password.toLowerCase(),
-      phone: this.state.phone,
-      address: this.state.address
-    };
-    const studentObj = {
-      firstName: this.state.childsName,
-      lastName: this.state.lastName,
-      birthdate: this.state.birthdate,
-      gender: this.state.gender,
-      allergies: this.state.allergies,
-      medical: this.state.medical
-    };
-    console.log(parentObj);
+    const newStudentObj = Object.keys(studentObj)
+      .reduce((obj, key) => {
+        obj[key] = studentObj[key].value;
+        return obj;
+      }, {});
+    console.log(newStudentObj);
+    
+
+
+    const userName = newParentObj.firstName.charAt(0) + newParentObj.lastName;
+    console.log('userName combined: ', userName);
+    const password = newParentObj.lastName.slice(0, 4) + newParentObj.phone.slice(-4);
+    console.log('password created: ', password);
+
+    newParentObj.password = password.toLowerCase();
+    newParentObj.userName = userName.toLowerCase();
+    newStudentObj.lastName = newParentObj.lastName;
+
+    console.log('Parent Final', newParentObj);
+    console.log('Student Final', newStudentObj);
 
     axios
-      .post('/api/registerUser', parentObj)
+      .post('/api/registerUser', newParentObj)
       .then(parent => {
         console.log('[axios]parent: ', parent.data);
-        studentObj.parentId = parent.data.userId;
-        console.log('studentObj', studentObj);
+        newStudentObj.parentId = parent.data.userId;
 
-        return axios.post('/api/createStudent', studentObj);
+        return axios.post('/api/createStudent', newStudentObj);
       })
       .then(student => {
         console.log('[axios]student: ', student.data);
@@ -230,8 +233,8 @@ class CreateStudent extends Component {
             />
           ))}
 
-        {/* STUDENT FORM */}
-        <hr />
+          {/* STUDENT FORM */}
+          <hr />
           {studentArr.map(formElement => (
             <Input
               key={formElement.id}
@@ -241,14 +244,14 @@ class CreateStudent extends Component {
               changed={e => this.studentChangedHandler(e, formElement.id)}
             />
           ))}
-        <Button
-          style={{margin:'5px 15px'}}
-          type='submit'
-          variant='primary'
-          onClick={!errors ? null : this.handleModalShow}
-        >
-          Submit
-        </Button>
+          <Button
+            style={{ margin: '5px 15px' }}
+            type='submit'
+            variant='primary'
+            onClick={!errors ? null : this.handleModalShow}
+          >
+            Submit
+          </Button>
         </form>
 
         {/* MODAL CONTAINER */}
