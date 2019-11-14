@@ -5,6 +5,7 @@ import Header from '../../../components/Header/Header';
 import MyModal from '../../../components/MyModal/MyModal';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
+import Input from '../../../components/Input/Input';
 
 import styles from './CreateReport.module.css';
 
@@ -23,9 +24,118 @@ class CreateReport extends Component {
       napTime: '',
       ate: '',
       suppliesNeeded: '',
-      comments: ''
+      comments: '',
+      reportObj: {
+        name: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            label: 'Name',
+            placeholder: 'John Smith'
+          },
+          value: ''
+        },
+        date: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'date',
+            label: 'Date',
+            placeholder: 'Date'
+          },
+          value: ''
+        },
+        attitude: {
+          elementType: 'select',
+          elementConfig: {
+            label: 'Today I was Feeling',
+            options: [
+              { value: 'default', displayValue: 'Choose One' },
+              { value: 'joyful', displayValue: 'Joyful' },
+              { value: 'happy', displayValue: 'Happy' },
+              { value: 'neutral', displayValue: 'Neutral' },
+              { value: 'sad', displayValue: 'Sad' },
+              { value: 'angry', displayValue: 'Angry' }
+            ]
+          },
+          value: ''
+        },
+        enjoyed: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            label: 'Today I Enjoyed',
+            placeholder: 'Today I Enjoyed'
+          },
+          value: ''
+        },
+        brBreaks: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            label: 'Bathroom Breaks',
+            placeholder: 'Bathroom Breaks'
+          },
+          value: ''
+        },
+        napTime: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            label: 'Nap Time',
+            placeholder: 'Nap Time'
+          },
+          value: ''
+        },
+        ate: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            label: 'Today I Ate',
+            placeholder: 'Today I Ate'
+          },
+          value: ''
+        },
+        suppliesNeeded: {
+          elementType: 'select',
+          elementConfig: {
+            label: 'Supplies Needed',
+            options: [
+              { value: 'none', displayValue: 'None' },
+              { value: 'cloths', displayValue: 'Cloths' },
+              { value: 'diapers', displayValue: 'Diapers' },
+              { value: 'wipes', displayValue: 'Wipes' }
+            ]
+          },
+          value: ''
+        },
+        comment: {
+          elementType: 'textarea',
+          elementConfig: {
+            type: 'text',
+            label: 'Comments',
+            placeholder: 'Comments'
+          },
+          value: ''
+        }
+      }
     };
   }
+
+  formChangedHandler = (e, inputIdentifier) => {
+    const updatedReportObj = {
+      ...this.state.reportObj
+    };
+    const updatedFormElement = {
+      ...updatedReportObj[inputIdentifier]
+    };
+    updatedFormElement.value = e.target.value;
+    updatedReportObj[inputIdentifier] = updatedFormElement;
+
+    this.setState({
+      errors: '',
+      reportObj: updatedReportObj
+    });
+  };
 
   handleModalClose = () => this.setState({ showModal: false });
   handleModalShow = () => this.setState({ showModal: true });
@@ -72,13 +182,42 @@ class CreateReport extends Component {
   };
 
   render() {
-    const { errors } = this.state;
+    const { errors, reportObj } = this.state;
+    const reportArr = [];
+    for (let key in reportObj) {
+      reportArr.push({
+        id: key,
+        config: reportObj[key]
+      });
+    }
+
     return (
       <div>
         <Header miniHeader={true} title='Create Report' />
         {/* Show error message if error state is true */}
         {errors && <Alert variant='danger'>{errors}</Alert>}
+
+        {/* REPORT FORM */}
         <form onSubmit={this.onSubmit}>
+          {reportArr.map(formElement => (
+            <Input
+              key={formElement.id}
+              elementType={formElement.config.elementType}
+              elementConfig={formElement.config.elementConfig}
+              value={formElement.config.value}
+              changed={e => this.parentChangedHandler(e, formElement.id)}
+            />
+          ))}
+          <Button
+            type='submit'
+            variant='primary'
+            onClick={!errors ? null : this.handleModalShow}
+          >
+            Submit
+          </Button>
+        </form>
+
+        {/* <form onSubmit={this.onSubmit}>
           <label className={styles.formInputTitle}>Name*</label>
           <input
             name='name'
@@ -194,7 +333,7 @@ class CreateReport extends Component {
           >
             Submit
           </Button>
-        </form>
+        </form> */}
 
         {/* MODAL CONTAINER */}
         <MyModal
