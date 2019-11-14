@@ -59,7 +59,9 @@ const input = props => {
 
   return (
     <div className={styles.Input}>
-      {props.label && <label className={styles.Label}>{props.label}</label>}
+      {props.elementConfig.label && (
+        <label className={styles.Label}>{props.elementConfig.label}</label>
+      )}
       {inputElement}
     </div>
   );
