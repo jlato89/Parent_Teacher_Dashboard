@@ -35,7 +35,7 @@ class CreateStudent extends Component {
           elementType: 'select',
           elementConfig: {
             options: [
-              { value: 'gender', displayValue: 'Gender' },
+              { value: 'default', displayValue: 'Gender' },
               { value: 'male', displayValue: 'Male' },
               { value: 'female', displayValue: 'Female' }
             ]
@@ -151,44 +151,38 @@ class CreateStudent extends Component {
     e.preventDefault();
     const { parentObj, studentObj } = this.state;
 
-    const newParentObj = Object.keys(parentObj)
-      .reduce((obj, key) => {
-        obj[key] = parentObj[key].value;
-        return obj;
-      }, {});
-    console.log(newParentObj);
+    const newParentObj = {}
+    for (let formElementIdentifier in parentObj) {
+      newParentObj[formElementIdentifier] = parentObj[formElementIdentifier].value
+    }
 
-    const newStudentObj = Object.keys(studentObj)
-      .reduce((obj, key) => {
-        obj[key] = studentObj[key].value;
-        return obj;
-      }, {});
-    console.log(newStudentObj);
-    
+    const newStudentObj = {}
+    for (let formElementIdentifier in studentObj) {
+      newStudentObj[formElementIdentifier] = studentObj[formElementIdentifier].value
+    }
+
 
 
     const userName = newParentObj.firstName.charAt(0) + newParentObj.lastName;
-    console.log('userName combined: ', userName);
     const password = newParentObj.lastName.slice(0, 4) + newParentObj.phone.slice(-4);
-    console.log('password created: ', password);
 
     newParentObj.password = password.toLowerCase();
     newParentObj.userName = userName.toLowerCase();
     newStudentObj.lastName = newParentObj.lastName;
 
-    console.log('Parent Final', newParentObj);
-    console.log('Student Final', newStudentObj);
+    console.log('newParentObj', newParentObj);
+    console.log('newStudentObj', newStudentObj);
 
     axios
       .post('/api/registerUser', newParentObj)
       .then(parent => {
-        console.log('[axios]parent: ', parent.data);
+        console.log('[axios]parent:', parent.data);
         newStudentObj.parentId = parent.data.userId;
 
         return axios.post('/api/createStudent', newStudentObj);
       })
       .then(student => {
-        console.log('[axios]student: ', student.data);
+        console.log('[axios]student:', student.data);
       })
       .catch(err => {
         console.log(err.response.data);
