@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-// import isEmpty from '../../../validation/is-empty';
 import Header from '../../../components/Header/Header';
 import MyModal from '../../../components/MyModal/MyModal';
 import Alert from 'react-bootstrap/Alert';
@@ -183,6 +182,9 @@ class CreateStudent extends Component {
       })
       .then(student => {
         console.log('[axios]student:', student.data);
+        setTimeout(() => {
+          this.props.history.push('/dashboard')
+        }, 5000)
       })
       .catch(err => {
         console.log(err.response.data);
@@ -211,7 +213,7 @@ class CreateStudent extends Component {
 
     return (
       <div>
-        <Header miniHeader={true} title='Create Report' />
+        <Header miniHeader={true} title='Create New User' />
         {/* Show error message if error state is true */}
         {errors && <Alert variant='danger'>{errors}</Alert>}
 
@@ -238,11 +240,13 @@ class CreateStudent extends Component {
               changed={e => this.studentChangedHandler(e, formElement.id)}
             />
           ))}
+
+          {/* Buttons */}
           <Button
             style={{ margin: '5px 15px' }}
             type='submit'
             variant='primary'
-            onClick={!errors ? null : this.handleModalShow}
+            onClick={errors ? null : this.handleModalShow}
           >
             Submit
           </Button>
@@ -250,7 +254,7 @@ class CreateStudent extends Component {
             style={{ margin: '5px 15px' }}
             // type='submit'
             variant='info'
-            onClick={!errors ? null : this.handleModalShow}
+            onClick={errors ? null : this.handleModalShow}
           >
             Add Another
           </Button>
@@ -260,9 +264,11 @@ class CreateStudent extends Component {
         <MyModal
           handleModalClose={this.handleModalClose}
           showModal={this.state.showModal}
-          title='Add Student'
         >
-          Submitted successfully.
+          <center>
+            <p>User and Student created successfully.</p>
+            <sup>You will be redirected shortly</sup>
+          </center>
         </MyModal>
       </div>
     );
