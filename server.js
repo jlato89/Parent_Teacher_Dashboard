@@ -29,18 +29,10 @@ app.use(express.json());
 app.use(express.static('public'));
 
 // Define Routes
-require('./routes/userRoutes/registerUser')(app);
-require('./routes/userRoutes/loginUser')(app);
-require('./routes/userRoutes/findUsers')(app);
-require('./routes/userRoutes/deleteUser')(app);
-require('./routes/userRoutes/updateUser')(app);
-require('./routes/eventRoutes/findEvents')(app);
-require('./routes/studentRoutes/findStudents')(app);
-require('./routes/studentRoutes/createStudent')(app);
-require('./routes/reportRoutes/createReport')(app);
-require('./routes/reportRoutes/findReports')(app);
-require('./routes/incidentRoutes/createIncident')(app);
-require('./routes/incidentRoutes/findIncidents')(app);
+require('./routes/api/userRoutes')(app);
+require('./routes/api/eventRoutes')(app);
+require('./routes/api/reportRoutes')(app);
+require('./routes/api/studentRoutes')(app);
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
