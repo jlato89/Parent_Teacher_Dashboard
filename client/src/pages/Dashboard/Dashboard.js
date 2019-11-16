@@ -27,7 +27,7 @@ class Dashboard extends Component {
         },
         {
           name: 'Add Students',
-          url: '/createStudent'
+          url: '/addStudent'
         },
         {
           name: 'Events',

@@ -9,7 +9,7 @@ import CreateReport from './pages/Reports/CreateReport/CreateReport';
 import Students from './pages/Students/Students';
 import EventList from './pages/EventList/EventList';
 import Reports from './pages/Reports/Reports';
-import CreateStudent from './pages/Students/CreateStudent/CreateStudent';
+import AddStudent from './pages/Students/AddStudent/AddStudent';
 import Profile from './pages/Profile/Profile';
 
 class App extends Component {
@@ -21,7 +21,7 @@ class App extends Component {
           <PrivateRoute exact path='/dashboard' component={Dashboard} />
           <PrivateRoute exact path='/createReport' component={CreateReport} />
           <PrivateRoute exact path='/students' component={Students} />
-          <PrivateRoute exact path='/createStudent' component={CreateStudent} />
+          <PrivateRoute exact path='/addStudent' component={AddStudent} />
           <PrivateRoute exact path='/events' component={EventList} />
           <PrivateRoute exact path='/reports' component={Reports} />
           <PrivateRoute exact path='/profile' component={Profile} />
