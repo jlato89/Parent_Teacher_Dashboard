@@ -13,6 +13,86 @@ class CreateStudent extends Component {
       redirect: false,
       showModal: false,
       errors: '',
+      parentObj: {
+        firstName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'First Name*'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        },
+        firstName2: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'First Name(2)'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        },
+        lastName: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Last Name*'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        },
+        email: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'email',
+            placeholder: 'Email'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        },
+        phone: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'phone',
+            placeholder: 'Phone*'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        },
+        address: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'text',
+            placeholder: 'Address'
+          },
+          validation: {
+            touched: false,
+            required: true
+          },
+          valid: false,
+          value: ''
+        }
+      },
       studentObj: {
         firstName: {
           elementType: 'input',
@@ -58,57 +138,18 @@ class CreateStudent extends Component {
           value: ''
         }
       },
-      parentObj: {
-        firstName: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'text',
-            placeholder: 'First Name*'
-          },
-          value: ''
-        },
-        firstName2: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'text',
-            placeholder: 'First Name(2)'
-          },
-          value: ''
-        },
-        lastName: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'text',
-            placeholder: 'Last Name*'
-          },
-          value: ''
-        },
-        email: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'email',
-            placeholder: 'Email'
-          },
-          value: ''
-        },
-        phone: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'text',
-            placeholder: 'Phone*'
-          },
-          value: ''
-        },
-        address: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'text',
-            placeholder: 'Address'
-          },
-          value: ''
-        }
-      }
+      formIsValid: false
     };
+  }
+
+  checkValidity(value, rules) {
+    let isValid = true;
+
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+
+    return isValid;
   }
 
   parentChangedHandler = (e, inputIdentifier) => {
@@ -119,11 +160,20 @@ class CreateStudent extends Component {
       ...updatedParentObj[inputIdentifier]
     };
     updatedFormElement.value = e.target.value;
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.validation.touched = true;
+
     updatedParentObj[inputIdentifier] = updatedFormElement;
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedParentObj){
+      formIsValid = updatedParentObj[inputIdentifier].valid && formIsValid;
+    }
 
     this.setState({
       errors: '',
-      parentObj: updatedParentObj
+      parentObj: updatedParentObj,
+      formIsValid: formIsValid
     });
   };
 
@@ -225,6 +275,9 @@ class CreateStudent extends Component {
               elementType={formElement.config.elementType}
               elementConfig={formElement.config.elementConfig}
               value={formElement.config.value}
+              invalid={!formElement.config.valid}
+              shouldValidate={formElement.config.validation}
+              touched={formElement.config.validation.touched}
               changed={e => this.parentChangedHandler(e, formElement.id)}
             />
           ))}
@@ -245,6 +298,7 @@ class CreateStudent extends Component {
           <Button
             style={{ margin: '5px 15px' }}
             type='submit'
+            disabled={!this.state.formIsValid}
             variant='primary'
             onClick={errors ? null : this.handleModalShow}
           >

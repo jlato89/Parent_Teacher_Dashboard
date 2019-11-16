@@ -3,13 +3,22 @@ import React from 'react';
 import styles from './Input.module.css';
 
 const input = props => {
-  let inputElement = null;
+  const inputStyles = [styles.InputElement];
+  if (props.invalid && props.shouldValidate && props.touched) {
+    inputStyles.push(styles.Invalid)
+  }
 
+  let validationError = null;
+  if (props.invalid && props.touched) {
+    validationError = <sup className={styles.ValidationError}>Please enter a valid value!</sup>
+  }
+  
+  let inputElement = null;
   switch (props.elementType) {
     case 'input':
       inputElement = (
         <input
-          className={styles.InputElement}
+          className={inputStyles.join(' ')}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -19,7 +28,7 @@ const input = props => {
     case 'textarea':
       inputElement = (
         <textarea
-          className={styles.InputElement}
+          className={inputStyles.join(' ')}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -29,7 +38,7 @@ const input = props => {
     case 'select':
       inputElement = (
         <select
-          className={styles.InputElement}
+          className={inputStyles.join(' ')}
           value={props.value}
           onChange={props.changed}
         >
@@ -49,7 +58,7 @@ const input = props => {
     default:
       inputElement = (
         <input
-          className={styles.InputElement}
+          className={inputStyles.join(' ')}
           {...props.elementConfig}
           value={props.value}
           onChange={props.changed}
@@ -63,6 +72,7 @@ const input = props => {
         <label className={styles.Label}>{props.elementConfig.label}</label>
       )}
       {inputElement}
+      {validationError}
     </div>
   );
 };
