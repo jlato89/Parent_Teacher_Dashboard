@@ -33,7 +33,7 @@ module.exports = app => {
       });
   });
 
-  app.post('/api/createStudent', (req, res) => {
+  app.post('/api/addStudent', (req, res) => {
     db.student
       .create(req.body)
       .then(response => {
