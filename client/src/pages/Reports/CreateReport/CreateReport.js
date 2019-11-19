@@ -12,19 +12,21 @@ class CreateReport extends Component {
   }
 
   onSubmit = (formObj) => {
+    formObj.suppliesNeeded = formObj.suppliesNeeded.toString();
+    formObj.enjoyed = formObj.enjoyed.toString();
     console.log('[Container]', formObj);
 
-    // axios
-    //   .post('/api/createReport', formObj)
-    //   .then(response => {
-    //     console.log(response.data);
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response.data);
-    //     this.setState({
-    //       errors: err.response.data
-    //     });
-    //   });
+    axios
+      .post('/api/createReport', formObj)
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+        this.setState({
+          errors: err.response.data
+        });
+      });
   };
 
   render() {
