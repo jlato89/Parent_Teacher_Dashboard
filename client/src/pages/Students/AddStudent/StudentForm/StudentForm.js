@@ -7,7 +7,7 @@ import styles from './StudentForm.module.css';
 
 const normalizePhone = value => {
   if (!value) return value;
-  const onlyNums = value.replace(/[^\d]/g, "");
+  const onlyNums = value.replace(/[^\d]/g, '');
   if (onlyNums.length <= 3) return onlyNums;
   if (onlyNums.length <= 7)
     return `(${onlyNums.slice(0, 3)}) ${onlyNums.slice(3, 7)}`;
@@ -16,6 +16,8 @@ const normalizePhone = value => {
     10
   )}`;
 };
+
+const required = value => (value ? undefined : 'Required')
 
 const NewStudentForm = (props) => (
   <Form
@@ -37,114 +39,148 @@ const NewStudentForm = (props) => (
       return (
         <form onSubmit={handleSubmit}>
           <h3>Parents Info</h3>
-          <div>
-            <label>First Name</label>
-            <Field
-              name='parentObj.firstName'
-              placeholder='John'
-              component='input' />
-            <label>First Name2 <sup>optional</sup></label>
-            <Field
-              name='parentObj.firstName2'
-              placeholder='Mary'
-              component='input' />
-            <label>Last Name</label>
-            <Field
-              name='parentObj.lastName'
-              placeholder='Smith'
-              component='input' />
-            <label>Email</label>
-            <Field
-              name='parentObj.email'
-              placeholder='test@test.com'
-              component='input' />
-            <label>Phone</label>
-            <Field
-              name='parentObj.phone'
-              placeholder='(999) 999-9999'
-              parse={normalizePhone}
-              component='input' />
-            <label>Address</label>
-            <Field
-              name='parentObj.address'
-              placeholder='123 Test Lane'
-              component='input' />
-          </div>
+          <section className={styles.parentForm}>
+            <Field name='parentObj.firstName' validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>First Name</label>
+                  <input {...input} type='text' placeholder='John' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name='parentObj.firstName2' validate={null}>
+              {({ input, meta }) => (
+                <div>
+                  <label>First Name2<sup>optional</sup></label>
+                  <input {...input} type='text' placeholder='Mary' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name='parentObj.lastName' validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Last Name</label>
+                  <input {...input} type='text' placeholder='Smith' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name='parentObj.email' validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Email</label>
+                  <input {...input} type='email' placeholder='test@test.com' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name='parentObj.phone' parse={normalizePhone} validate={required}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Phone</label>
+                  <input {...input} type='text' placeholder='(999) 999-9999' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+            <Field name='parentObj.address' validate={null}>
+              {({ input, meta }) => (
+                <div>
+                  <label>Address</label>
+                  <input {...input} type='text' placeholder='123 Test Ln' />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+              )}
+            </Field>
+          </section>
 
           <div className='buttons'>
-            <button
-              type='button'
-              onClick={() => push('studentArr', undefined)}
-            >
+            <button type='button' onClick={() => push('studentArr', undefined)}>
               Add Child
-              </button>
-            <button
-              type='button'
-              onClick={() => pop('studentArr')}
-            >
+            </button>
+            <button type='button' onClick={() => pop('studentArr')}>
               Remove Child
-              </button>
+            </button>
           </div>
 
           {/* Student Form */}
-          <FieldArray name='studentArr'>
-            {({ fields }) =>
-              fields.map((name, index) => (
-                <div key={name}>
-                  <h5>
-                    Child #{index + 1}
-                    <span
-                      onClick={() => fields.remove(index)}
-                      style={{ cursor: 'pointer' }}
-                      role='img'
-                      aria-label='remove'
-                    >{' '}
-                      ❌
+          <section className={styles.StudentForm}>
+            <FieldArray name='studentArr'>
+              {({ fields }) =>
+                fields.map((name, index) => (
+                  <div key={name}>
+                    <h5>
+                      Child #{index + 1}
+                      <span
+                        onClick={() => fields.remove(index)}
+                        style={{ cursor: 'pointer' }}
+                        role='img'
+                        aria-label='remove'
+                      >{' '}
+                        ❌
                     </span>
-                  </h5>
-                  <div>
-                    <label>First Name</label>
-                    <Field
-                      name={`${name}.firstName`}
-                      component='input'
-                      placeholder='Bobby' />
-                    <label>Last Name</label>
-                    <Field
-                      name={`${name}.lastName`}
-                      component='input'
-                      initialValue={values.parentObj.lastName}
-                      placeholder='Smith' />
-                    <label>Birthdate</label>
-                    <Field
-                      name={`${name}.birthdate`}
-                      component='input'
-                      type='date'
-                      placeholder='01/01/2012' />
+                    </h5>
+                    <Field name={`${name}.firstName`} validate={required}>
+                      {({ input, meta }) => (
+                        <div>
+                          <label>First Name</label>
+                          <input {...input} type='text' placeholder='Bobby' />
+                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
+                    <Field name={`${name}.lastName`} initialValue={values.parentObj.lastName} validate={required}>
+                      {({ input, meta }) => (
+                        <div>
+                          <label>Last Name</label>
+                          <input {...input} type='text' placeholder='Smith' />
+                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
+                    <Field name={`${name}.birthdate`} validate={required}>
+                      {({ input, meta }) => (
+                        <div>
+                          <label>Birthdate</label>
+                          <input {...input} type='date' placeholder='01/01/2012' />
+                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
                     <label>Gender</label><br />
                     <Field
                       name={`${name}.gender`}
                       component='select'
                     >
-                      <option value='default'>Choose One</option>
+                      <option value=''>Choose One</option>
                       <option value='male'>Male</option>
                       <option value='female'>Female</option>
                     </Field>
                     <br />
-                    <label>Allergies</label>
-                    <Field
-                      name={`${name}.allergies`}
-                      component='input'
-                      placeholder='Peanuts' />
-                    <label>Medical</label><br />
-                    <Field
-                      name={`${name}.medical`}
-                      component='textarea'
-                      placeholder='' />
+                    <Field name={`${name}.allergies`} validate={required}>
+                      {({ input, meta }) => (
+                        <div>
+                          <label>Allergies</label>
+                          <input {...input} type='text' placeholder='Peanuts' />
+                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                        </div>
+                      )}
+                    </Field>
+                    <Field name={`${name}.medical`}>
+                      {({ input, meta }) => (
+                        <div>
+                          <label>Medical</label>
+                          <input {...input} type='text' placeholder='' />
+                        </div>
+                      )}
+                    </Field>
                   </div>
-                </div>
-              ))
-            }
-          </FieldArray>
+                ))
+              }
+            </FieldArray>
+          </section>
 
           <div className='buttons'>
             <button
