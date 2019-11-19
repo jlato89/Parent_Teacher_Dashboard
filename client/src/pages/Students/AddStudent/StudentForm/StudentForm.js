@@ -3,7 +3,7 @@ import { Form, Field } from 'react-final-form';
 import arrayMutators from 'final-form-arrays';
 import { FieldArray } from 'react-final-form-arrays';
 
-import styles from './NewStudentForm.module.css';
+import styles from './StudentForm.module.css';
 
 const normalizePhone = value => {
   if (!value) return value;

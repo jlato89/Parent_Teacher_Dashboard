@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Header from '../../../components/Header/Header';
 
-import FormContent from './NewStudentForm/NewStudentForm';
+import FormContent from './StudentForm/StudentForm';
 
 
 class AddStudent extends Component {
@@ -21,26 +21,29 @@ class AddStudent extends Component {
 
     console.log('[Container]', formObj);
 
-    // axios
-    //   .post('/api/registerUser', formObj.parentObj)
-    //   .then(parent => {
-    //     console.log('[axios]parent:', parent.data);
-    //     formObj.studentArr.parentId = parent.data.userId;
+    axios
+      .post('/api/registerUser', formObj.parentObj)
+      .then(parent => {
+        console.log('[axios]parent:', parent.data);
+        formObj.studentArr.parentId = parent.data.userId;
+        formObj.studentArr.map(student => {
+          student.parentId = parent.data.userId
+        });
 
-    //     return axios.post('/api/addStudent', formObj.studentArr);
-    //   })
-    //   .then(student => {
-    //     console.log('[axios]student:', student.data);
-    //     // setTimeout(() => {
-    //     //   this.props.history.push('/dashboard')
-    //     // }, 5000)
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response.data);
-    //     // this.setState({
-    //     //   errors: err.response.data
-    //     // });
-    //   });
+        return axios.post('/api/addStudent', formObj.studentArr);
+      })
+      .then(student => {
+        console.log('[axios]student:', student.data);
+        // setTimeout(() => {
+        //   this.props.history.push('/dashboard')
+        // }, 5000)
+      })
+      .catch(err => {
+        console.log(err);
+        // this.setState({
+        //   errors: err.response.data
+        // });
+      });
   };
 
   render() {
