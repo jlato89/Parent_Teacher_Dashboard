@@ -35,9 +35,9 @@ module.exports = app => {
 
   app.post('/api/addStudent', (req, res) => {
     db.student
-      .create(req.body)
+      .bulkCreate(req.body)
       .then(response => {
-        console.log(response.dataValues);
+        console.log(response);
         res.status(200).send({
           message: 'Student(s) Added'
         });
