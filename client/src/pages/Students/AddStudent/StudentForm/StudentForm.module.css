@@ -1,6 +1,9 @@
-form input {
-  display: block;
-}
 form label {
+  display: block;
   margin: 10px 0 0 0;
+}
+.fieldError {
+  color: red;
+  font-weight: bold;
+  margin: 0 10px
 }
