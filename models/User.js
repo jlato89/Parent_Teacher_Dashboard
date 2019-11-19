@@ -28,7 +28,7 @@ module.exports = function(sequelize, Sequelize) {
          type: Sequelize.TEXT
       },
       phone: {
-         type: Sequelize.INTEGER
+         type: Sequelize.STRING
       },
       address: {
          type: Sequelize.STRING
@@ -37,7 +37,7 @@ module.exports = function(sequelize, Sequelize) {
          type: Sequelize.STRING
       },
       emergencyPhone: {
-         type: Sequelize.INTEGER
+         type: Sequelize.STRING
       },
       emergencyRelation: {
          type: Sequelize.STRING
