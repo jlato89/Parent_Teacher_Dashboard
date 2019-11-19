@@ -1,0 +1,9 @@
+form div{
+  margin: 5px 0;
+}
+label {
+  font-weight: bold;
+}
+.inline {
+  display: inline;
+}

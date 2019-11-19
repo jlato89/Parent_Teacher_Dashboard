@@ -1,23 +1,32 @@
 import React from 'react'
 import { Form, Field } from 'react-final-form'
 
+import styles from './ReportForm.module.css';
+
+const Condition = ({ when, is, children }) => (
+  <Field name={when} subscription={{ value: true }}>
+    {({ input: { value } }) => (value === is ? children : null)}
+  </Field>
+)
+
 const ReportForm = (props) => (
   <>
     <Form
       onSubmit={props.onSubmit}
+      initialValues={{ enjoyed: '', suppliesNeeded: '' }}
       render={({ handleSubmit, form, submitting, pristine, values }) => (
         <form onSubmit={handleSubmit}>
           <div>
-            {/* <label>ChildName</label> */}
+            <label>ChildName</label>
             <Field
-              name='childName'
+              name='studentName'
               component='input'
               type='text'
               placeholder='Childs Full Name'
             />
           </div>
           <div>
-            {/* <label>Report Date</label> */}
+            <label>Report Date</label>
             <Field
               name='date'
               component='input'
@@ -26,29 +35,70 @@ const ReportForm = (props) => (
             />
           </div>
           <div>
-            {/* <label>Today I was feeling</label> */}
+            <label>Today I was felt</label><br />
             <Field name='attitude' component='select'>
-              <option>Today I Felt</option>
-              <option value='1'>1 - Happy</option>
-              <option value='2'>2</option>
-              <option value='3'>3</option>
-              <option value='4'>4</option>
-              <option value='5'>5 - Sad</option>
+              <option value='default'>Choose One</option>{/* Validate to avoid value 'default' */}
+              <option value='happy'>Happy</option>
+              <option value='good'>Good</option>
+              <option value='okay'>Okay</option>
+              <option value='bad'>Bad</option>
+              <option value='terrible'>Terrible</option>
             </Field>
           </div>
           <div>
-            {/* <label>Today I enjoyed</label> */}
-            <Field name='enjoyed' component='select' multiple>
-              <option>Today I Enjoyed</option>
-              <option value='gym'>Gym</option>
-              <option value='drawing'>Drawing</option>
-              <option value='outside'>Outside</option>
-              <option value='reading'>reading</option>
-              <option value='other'>other</option>
-            </Field>
+            <label>Today I enjoyed</label><br />
+            <Field
+              className={styles.inline}
+              name='enjoyed'
+              component='input'
+              type='checkbox'
+              value='gym'
+            /> {' '}
+            Gym<br />
+            <Field
+              className={styles.inline}
+              name='enjoyed'
+              component='input'
+              type='checkbox'
+              value='drawing'
+            /> {' '}
+            Drawing<br />
+            <Field
+              className={styles.inline}
+              name='enjoyed'
+              component='input'
+              type='checkbox'
+              value='outside'
+            /> {' '}
+            Outside<br />
+            <Field
+              className={styles.inline}
+              name='enjoyed'
+              component='input'
+              type='checkbox'
+              value='reading'
+            /> {' '}
+            reading<br />
+            <Field
+              className={styles.inline}
+              name='enjoyedOther'
+              component='input'
+              type='checkbox'
+            /> {' '}
+            Other<br />
           </div>
+          <Condition when='enjoyedOther' is={true}>
+            <div>
+              {/* <label>Please Specify</label> */}
+              <Field
+                name='enjoyed'
+                component='input'
+                placeholder='Please Specify'
+              />
+            </div>
+          </Condition>
           <div>
-            {/* <label>Bathroom Breaks</label> */}
+            <label>Bathroom Breaks</label>
             <Field
               name='brBreaks'
               component='input'
@@ -57,7 +107,7 @@ const ReportForm = (props) => (
             />
           </div>
           <div>
-            {/* <label>Nap Time</label> */}
+            <label>Nap Time</label>
             <Field
               name='napTime'
               component='input'
@@ -66,7 +116,7 @@ const ReportForm = (props) => (
             />
           </div>
           <div>
-            {/* <label>Today I ate</label> */}
+            <label>Today I ate</label>
             <Field
               name='ate'
               component='input'
@@ -76,45 +126,51 @@ const ReportForm = (props) => (
           </div>
           <div>
             <label>Needed Supplies</label><br />
-            <label>
-              <Field
-                name='neededSupplies'
-                component='input'
-                type='checkbox'
-                value='diapers'
-              /> {' '}
-              Diapers
-            </label>
-            <label>
-              <Field
-                name='neededSupplies'
-                component='input'
-                type='checkbox'
-                value='cloths'
-              /> {' '}
-              Cloths
-            </label>
-            <label>
-              <Field
-                name='neededSupplies'
-                component='input'
-                type='checkbox'
-                value='wipes'
-              /> {' '}
-              Wipes
-            </label>
-            <label>
-              <Field
-                name='neededSupplies'
-                component='input'
-                type='checkbox'
-                value='other'
-              /> {' '}
-              Other
-            </label>
+            <Field
+              className={styles.inline}
+              name='suppliesNeeded'
+              component='input'
+              type='checkbox'
+              value='diapers'
+            /> {' '}
+            Diapers<br />
+            <Field
+              className={styles.inline}
+              name='suppliesNeeded'
+              component='input'
+              type='checkbox'
+              value='cloths'
+            /> {' '}
+            Cloths<br />
+            <Field
+              className={styles.inline}
+              name='suppliesNeeded'
+              component='input'
+              type='checkbox'
+              value='wipes'
+            /> {' '}
+            Wipes<br />
+            <Field
+              className={styles.inline}
+              name='suppliesNeededOther'
+              component='input'
+              type='checkbox'
+            /> {' '}
+            Other<br />
           </div>
+          <Condition when='suppliesNeededOther' is={true}>
+            <div>
+              {/* <label>Please Specify</label> */}
+              <Field
+                name='suppliesNeeded'
+                component='input'
+                placeholder='Please Specify'
+              />
+            </div>
+          </Condition>
+
           <div>
-            {/* <label>Comments</label> */}
+            <label>Comments</label><br />
             <Field
               name='comments'
               component='textarea'
