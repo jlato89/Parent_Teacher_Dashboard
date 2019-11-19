@@ -26,9 +26,7 @@ class AddStudent extends Component {
       .then(parent => {
         console.log('[axios]parent:', parent.data);
         formObj.studentArr.parentId = parent.data.userId;
-        formObj.studentArr.map(student => {
-          student.parentId = parent.data.userId
-        });
+        formObj.studentArr.map(student => student.parentId = parent.data.userId); //! check if still working
 
         return axios.post('/api/addStudent', formObj.studentArr);
       })
