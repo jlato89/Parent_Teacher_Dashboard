@@ -45,16 +45,16 @@ const NewStudentForm = (props) => (
                 <div>
                   <label>First Name</label>
                   <input {...input} type='text' placeholder='John' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
             <Field name='parentObj.firstName2' validate={null}>
               {({ input, meta }) => (
                 <div>
-                  <label>First Name2<sup>optional</sup></label>
+                  <label>First Name2<sup>(optional)</sup></label>
                   <input {...input} type='text' placeholder='Mary' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
@@ -63,7 +63,7 @@ const NewStudentForm = (props) => (
                 <div>
                   <label>Last Name</label>
                   <input {...input} type='text' placeholder='Smith' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
@@ -72,7 +72,7 @@ const NewStudentForm = (props) => (
                 <div>
                   <label>Email</label>
                   <input {...input} type='email' placeholder='test@test.com' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
@@ -81,7 +81,7 @@ const NewStudentForm = (props) => (
                 <div>
                   <label>Phone</label>
                   <input {...input} type='text' placeholder='(999) 999-9999' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
@@ -90,7 +90,7 @@ const NewStudentForm = (props) => (
                 <div>
                   <label>Address</label>
                   <input {...input} type='text' placeholder='123 Test Ln' />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                 </div>
               )}
             </Field>
@@ -127,7 +127,7 @@ const NewStudentForm = (props) => (
                         <div>
                           <label>First Name</label>
                           <input {...input} type='text' placeholder='Bobby' />
-                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                          {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
@@ -136,7 +136,7 @@ const NewStudentForm = (props) => (
                         <div>
                           <label>Last Name</label>
                           <input {...input} type='text' placeholder='Smith' />
-                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                          {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
@@ -145,7 +145,7 @@ const NewStudentForm = (props) => (
                         <div>
                           <label>Birthdate</label>
                           <input {...input} type='date' placeholder='01/01/2012' />
-                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                          {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
@@ -164,15 +164,15 @@ const NewStudentForm = (props) => (
                         <div>
                           <label>Allergies</label>
                           <input {...input} type='text' placeholder='Peanuts' />
-                          {meta.error && meta.touched && <span>{meta.error}</span>}
+                          {meta.error && meta.touched && <span className={styles.fieldError}>{meta.error}</span>}
                         </div>
                       )}
                     </Field>
-                    <Field name={`${name}.medical`}>
+                    <Field name={`${name}.medical`} component='textarea'>
                       {({ input, meta }) => (
                         <div>
-                          <label>Medical</label>
-                          <input {...input} type='text' placeholder='' />
+                          <label>Medical <sup>(optional)</sup></label>
+                          <textarea {...input} placeholder='' />
                         </div>
                       )}
                     </Field>
