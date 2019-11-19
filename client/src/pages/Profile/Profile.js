@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
+import ProfileForm from './ProfileForm/ProfileForm';
 
 class Profile extends Component {
   constructor() {
@@ -29,24 +30,18 @@ class Profile extends Component {
       .catch(err => console.log(err.response));
   }
 
+  onSubmit = (formObj) => {
+    console.log('[Container]', formObj);
+  }
+
+
   render() {
     const { user } = this.state;
     return (
       <div>
         <Header miniHeader={true} title='Your Profile' />
         {user ? (
-          <table>
-            <tbody>
-              {Object.keys(user).map((keyName, keyIndex) => (
-                <tr key={keyIndex}>
-                  <th>{keyName}</th>
-                  <th>
-                    <input placeholder={user[keyName]} />
-                  </th>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <ProfileForm user={user} onSubmit={this.onSubmit} />
         ) : (
           'Loading...'
         )}
