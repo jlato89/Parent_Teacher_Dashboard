@@ -1,15 +1,15 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import ProfilePlaceholder from '../../../assets/images/profile-placeholder.png';
 
+// import styles from './StudentCard.module.css';
 
 const StudentCard = (props) => {
-  // parentInfoHandler = (parentId) => {
-  //   props.parentArr.find(parent => id===3)
-  // }
+  const parentInfoHandler = (parentId) => {
+    let obj=  props.parentArr.find(p => p.id === parentId)
+    return obj
+  }
   return (
-    // <main style={{ display: 'flex', flexWrap: 'wrap' }}>
     <main>
       {props.studentArr.map(student => (
         <Card className='d-flex flex-row' key={student.id}>
@@ -23,13 +23,12 @@ const StudentCard = (props) => {
               {student.firstName} {student.lastName}
             </Card.Title>
             <Card.Subtitle>
-              {props.parentArr[2].phone}
+              {parentInfoHandler(student.parentId).phone}
             </Card.Subtitle>
             <Card.Text>
-              Place some info here.
+              (Additional Info will go here)
             </Card.Text>
             <Card.Link href='#'>More Info</Card.Link>
-            {/* <Button variant="primary">Info</Button> */}
           </Card.Body>
         </Card>
       ))}
