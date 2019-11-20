@@ -38,7 +38,27 @@ module.exports = app => {
     })(req, res, next);
   });
 
-  //* Find User
+  //* Find Users
+  app.get('/findUsers/:userType', (req, res) => {
+    const userType = req.params.userType;
+
+    db.user
+      .findAll({
+        where: {
+          userType: userType
+        }
+      })
+      .then(users => {
+        // console.log(user);
+        res.status(200).send(users);
+      })
+      .catch(err => {
+        console.log(err.response);
+        res.status(500).send(err.response);
+      });
+  });
+
+  //* Find Current User
   app.get('/api/findUser', (req, res, next) => {
     passport.authenticate('jwt', (err, user, info) => {
       if (err) {

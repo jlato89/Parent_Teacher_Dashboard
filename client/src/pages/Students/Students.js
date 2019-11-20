@@ -3,19 +3,35 @@ import axios from 'axios';
 import Header from '../../components/Header/Header';
 import StudentCard from './StudentCard/StudentCard';
 const Students = () => {
-  const [data, setData] = useState({ studentArr: [] });
+  const [data, setData] = useState({ studentArr: [], parentArr: [] });
 
   useEffect(() => {
-    axios('/api/findStudents').then(students =>
-      setData({ studentArr: students.data })
-    );
+    // axios('/api/findStudents').then(students =>
+    //   setData({ studentArr: students.data })
+    // );
+    axios
+      .all([
+        axios.get('/api/findStudents'),
+        axios.get('/findUsers/parent')
+      ])
+      .then(
+        axios.spread((students, parents) => {
+          console.log('Students:', students.data);
+          console.log('Parents:', parents.data);
+          setData({
+            studentArr: students.data,
+            parentArr: parents.data
+          });
+        })
+      )
+      .catch(err => console.log(err.response));
+
   }, []);
-  console.log(data.studentArr);
 
   return (
     <div>
       <Header miniHeader title='Student List' />
-      <StudentCard studentArr={data.studentArr} />
+      <StudentCard studentArr={data.studentArr} parentArr={data.parentArr} />
       {/* <table className='table'>
         <thead className='thead-dark'>
           <tr>
