@@ -9,7 +9,7 @@ module.exports = function(sequelize, Sequelize) {
          allowNull: false
       },
       parentId: {
-         type: Sequelize.UUID,
+         type: Sequelize.INTEGER,
          allowNull: false
       },
       profileImage: {
