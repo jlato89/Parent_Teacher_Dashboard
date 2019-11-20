@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../../components/Header/Header';
-import ProfilePlaceholder from '../../assets/images/profile-placeholder.png';
-
+import StudentCard from './StudentCard/StudentCard';
 const Students = () => {
   const [data, setData] = useState({ studentArr: [] });
 
@@ -16,7 +15,8 @@ const Students = () => {
   return (
     <div>
       <Header miniHeader title='Student List' />
-      <table className='table'>
+      <StudentCard studentArr={data.studentArr} />
+      {/* <table className='table'>
         <thead className='thead-dark'>
           <tr>
             <th></th>
@@ -51,7 +51,7 @@ const Students = () => {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
   );
 };
