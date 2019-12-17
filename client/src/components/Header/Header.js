@@ -11,53 +11,47 @@ import styles from './Header.module.css';
 const date = new Date();
 const curHr = date.getHours();
 let greetingMsg;
-if (curHr < 12) {
-  greetingMsg = 'Good Morning';
-} else if (curHr < 18) {
-  greetingMsg = 'Good Afternoon';
-} else {
-  greetingMsg = 'Good Evening';
-}
+if (curHr < 12) { greetingMsg = 'Good Morning'; }
+else if (curHr < 18) { greetingMsg = 'Good Afternoon'; }
+else { greetingMsg = 'Good Evening'; }
 
 const Header = props => {
-  let miniHeader = props.miniHeader;
+  let headerContent;
 
-  return (
-    <div className={styles.container}>
+  if (props.miniHeader) {
+    headerContent = (
       <div className={styles.topHeader}>
         {/* Left Button */}
-        {miniHeader ? (
-          <a href='/dashboard'>
-            <img src={HomeIcon} alt='Home' height='30px' />
-          </a>
-        ) : (
+        <a href='/dashboard'>
+          <img src={HomeIcon} alt='Home' height='30px' />
+        </a>
+        {/* Middle */}
+        <span className={styles.topHeaderText}>
+          {props.title ? props.title : 'PT Dashboard'}
+        </span>
+        {/* Right Button */}
+        <img src={MenuBtn} alt='Menu' height='30px' />
+      </div>
+    )
+  } else {
+    headerContent = (
+      <>
+        <div className={styles.topHeader}>
+          {/* Left Button */}
           <a href='/mail'>
             <img src={MailIcon} alt='Mail' height='30px' />
           </a>
-        )}
-        {/* Title */}
-        {miniHeader ? (
-          <span className={styles.topHeaderText}>
-            {props.title ? props.title : 'PT Dashboard'}
-          </span>
-        ) : (
+          {/* Middle */}
           <img
             className={styles.profileImg}
             src={props.profileImg ? props.profileImg : ProfileImgDefault}
             alt='Profile Img'
           />
-        )}
-        {/* Right Button */}
-        {miniHeader ? (
-          <img src={MenuBtn} alt='Menu' height='30px' />
-        ) : (
+          {/* Right Button */}
           <a href='/search'>
             <img src={SearchIcon} alt='Search' height='30px' />
           </a>
-        )}
-      </div>
-      {/* Bottom Header */}
-      {!miniHeader && (
+        </div>
         <div className={styles.bottomHeaderText}>
           <p>
             <strong>Hi {props.name},</strong> {greetingMsg}
@@ -73,7 +67,13 @@ const Header = props => {
             />
           </p>
         </div>
-      )}
+      </>
+    )
+  }
+
+  return (
+    <div className={styles.container}>
+      {headerContent}
     </div>
   );
 };

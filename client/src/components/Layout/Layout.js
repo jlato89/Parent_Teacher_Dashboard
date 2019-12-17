@@ -4,11 +4,9 @@ import Header from '../Header/Header';
 const Layout = props => {
   return (
     <>
-      <Header
-        onClickLogout={props.onClickLogout}
-        profileImg={props.profileImg}
-        name={props.name}
-      />
+      <header>
+        <Header {...props} />
+      </header>
       <main>{props.children}</main>
     </>
   );
