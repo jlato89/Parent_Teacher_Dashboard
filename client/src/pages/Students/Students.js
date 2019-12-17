@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from '../../components/Header/Header';
+import Layout from '../../components/Layout/Layout';
 import StudentCard from './StudentCard/StudentCard';
 const Students = () => {
   const [data, setData] = useState({ studentArr: [], parentArr: [] });
@@ -27,7 +27,7 @@ const Students = () => {
 
   return (
     <div>
-      <Header miniHeader title='Student List' />
+      <Layout miniHeader title='Student List' />
       <StudentCard studentArr={data.studentArr} parentArr={data.parentArr} />
     </div>
   );

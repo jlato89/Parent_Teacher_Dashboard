@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from '../../components/Header/Header';
+import Layout from '../../components/Layout/Layout';
 import MyModal from '../../components/MyModal/MyModal';
 import ReportModal from './ReportModal/ReportModal';
 import Moment from 'react-moment';
@@ -31,7 +31,7 @@ class Reports extends Component {
     const { reportArr, modalShow, modalData } = this.state;
     return (
       <div>
-        <Header miniHeader title='Reports List' />
+        <Layout miniHeader title='Reports List' />
         {reportArr ? (
           <table className='table'>
             <thead className='thead-dark'>

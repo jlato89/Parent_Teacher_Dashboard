@@ -1,11 +1,11 @@
 import React from 'react';
 import Moment from 'react-moment';
-import MailIcon from '../../assets/images/outline_mail_white_24.png';
-import SearchIcon from '../../assets/images/outline_search_white_24.png';
-import HomeIcon from '../../assets/images/outline_home_white_18dp.png';
-import MenuBtn from '../../assets/images/outline_menu_white_24.png';
-import LogoutIcon from '../../assets/images/outline_directions_run_white_18dp.png';
-import ProfileImgDefault from '../../assets/images/outline_account_circle_white_48.png';
+import MailIcon from '../../../assets/images/outline_mail_white_24.png';
+import SearchIcon from '../../../assets/images/outline_search_white_24.png';
+import HomeIcon from '../../../assets/images/outline_home_white_18dp.png';
+import MenuBtn from '../../../assets/images/outline_menu_white_24.png';
+import LogoutIcon from '../../../assets/images/outline_directions_run_white_18dp.png';
+import ProfileImgDefault from '../../../assets/images/outline_account_circle_white_48.png';
 import styles from './Header.module.css';
 
 const date = new Date();
@@ -59,10 +59,9 @@ const Header = props => {
           <p>
             <Moment format='ddd, MMM Do YYYY' date={date} />
             <img
+              className={styles.logoutIcon}
               src={LogoutIcon}
               alt='Logout'
-              height='30px'
-              style={{ float: 'right' }}
               onClick={props.onClickLogout}
             />
           </p>
@@ -72,7 +71,7 @@ const Header = props => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.wrapper}>
       {headerContent}
     </div>
   );

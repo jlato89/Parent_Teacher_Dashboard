@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Header from '../../components/Header/Header';
+import Layout from '../../components/Layout/Layout';
 import Moment from 'react-moment';
 
 const Students = () => {
@@ -15,7 +15,7 @@ const Students = () => {
 
   return (
     <div>
-      <Header miniHeader title='Event List' />
+      <Layout miniHeader title='Event List' />
       <table className='table'>
         <thead className='thead-dark'>
           <tr>

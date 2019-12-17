@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from '../../../components/Header/Header';
+import Layout from '../../../components/Layout/Layout';
 import ReportForm from "./ReportForm/ReportForm";
 
 class CreateReport extends Component {
@@ -32,7 +32,7 @@ class CreateReport extends Component {
   render() {
     return (
       <div>
-        <Header miniHeader={true} title='Add Report' />
+        <Layout miniHeader title='Add Report' />
         <ReportForm onSubmit={this.onSubmit} />
       </div>
     );

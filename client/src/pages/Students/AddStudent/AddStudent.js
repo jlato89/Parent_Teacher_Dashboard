@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Header from '../../../components/Header/Header';
-
+import Layout from '../../../components/Layout/Layout';
 import FormContent from './StudentForm/StudentForm';
 
 
@@ -47,8 +46,8 @@ class AddStudent extends Component {
   render() {
     return (
       <div>
-        <Header miniHeader={true} title='Add New Student' />
-        <FormContent onSubmit={this.onSubmit}/>
+        <Layout miniHeader={true} title='Add New Student' />
+        <FormContent onSubmit={this.onSubmit} />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import setAuthToken from '../../utils/setAuthToken';
 import axios from 'axios';
-import Header from '../../components/Header/Header';
+import Layout from '../../components/Layout/Layout';
 import ProfileForm from './ProfileForm/ProfileForm';
 
 class Profile extends Component {
@@ -39,12 +39,12 @@ class Profile extends Component {
     const { user } = this.state;
     return (
       <div>
-        <Header miniHeader={true} title='Your Profile' />
+        <Layout miniHeader={true} title='Your Profile' />
         {user ? (
           <ProfileForm user={user} onSubmit={this.onSubmit} />
         ) : (
-          'Loading...'
-        )}
+            'Loading...'
+          )}
       </div>
     );
   }
