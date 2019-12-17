@@ -7,9 +7,7 @@ import Layout from '../../components/Layout/Layout';
 import Announcements from '../../components/Events/Announcement/Announcement';
 import DashBtns from '../../components/DashBtns/DashBtns';
 import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvents';
-import Spinner from 'react-bootstrap/Spinner';
-import Logo from '../../components/Logo/Logo';
-import styles from './Dashboard.module.css';
+import Loading from '../../components/Loading/Loading';
 
 class Dashboard extends Component {
   constructor() {
@@ -100,14 +98,7 @@ class Dashboard extends Component {
     //? Content to render when app is loading
     let dashboardContent;
     if (this.state.loading) {
-      dashboardContent = (
-        <div className={styles.container}>
-          <Logo />
-          <Spinner animation='border' role='status'>
-            <span className='sr-only'>Loading...</span>
-          </Spinner>
-        </div>
-      );
+      dashboardContent = <Loading />;
     }
     //? Main content to render once app is finished loading
     else {

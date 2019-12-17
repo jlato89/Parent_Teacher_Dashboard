@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import MyModal from '../../components/MyModal/MyModal';
 import ReportModal from './ReportModal/ReportModal';
 import Moment from 'react-moment';
+import Loading from '../../components/Loading/Loading';
 
 class Reports extends Component {
   constructor() {
@@ -52,9 +53,7 @@ class Reports extends Component {
               ))}
             </tbody>
           </table>
-        ) : (
-            'Loading...'
-          )}
+        ) : <Loading />}
         <MyModal
           title='Report Details'
           showModal={modalShow}
