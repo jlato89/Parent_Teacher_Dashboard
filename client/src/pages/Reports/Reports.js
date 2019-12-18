@@ -4,7 +4,7 @@ import Layout from '../../components/Layout/Layout';
 import MyModal from '../../components/MyModal/MyModal';
 import ReportModal from './ReportModal/ReportModal';
 import Moment from 'react-moment';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/UI/Loading/Loading';
 
 class Reports extends Component {
   constructor() {

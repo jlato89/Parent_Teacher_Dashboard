@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Authenticate from '../../utils/Authenticate';
 import styles from './Login.module.css';
-import Logo from '../../components/Logo/Logo';
+import Logo from '../../components/UI/Logo/Logo';
 
 class Login extends Component {
   constructor() {
@@ -42,7 +42,7 @@ class Login extends Component {
     axios
       .post('/api/loginUser', userData)
       .then(response => {
-        if(response.data.token) {
+        if (response.data.token) {
           const { token } = response.data
 
           localStorage.setItem('ptDash', token)

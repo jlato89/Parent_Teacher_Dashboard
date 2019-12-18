@@ -7,7 +7,7 @@ import Layout from '../../components/Layout/Layout';
 import Announcements from '../../components/Events/Announcement/Announcement';
 import DashBtns from '../../components/DashBtns/DashBtns';
 import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvents';
-import Loading from '../../components/Loading/Loading';
+import Loading from '../../components/UI/Loading/Loading';
 
 class Dashboard extends Component {
   constructor() {

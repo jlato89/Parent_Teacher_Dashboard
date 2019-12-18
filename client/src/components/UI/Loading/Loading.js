@@ -1,6 +1,6 @@
 import React from 'react';
 import Spinner from 'react-bootstrap/Spinner';
-import Logo from '../../components/Logo/Logo';
+import Logo from '../Logo/Logo';
 import styles from './Loading.module.css';
 
 const Loading = () => {
