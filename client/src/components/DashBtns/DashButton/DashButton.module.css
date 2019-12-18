@@ -1,17 +1,20 @@
-.menuBtn {
+.container {
   background-color: darkgrey;
+  text-align: center;
   height: 120px;
   width: 120px;
   border-radius: 30%;
   padding: 10px;
   margin: 15px;
 }
-.menuBtnTitle{
-  display: inline-block;
+.menuBtnTitle {
+  display: table-cell;
+  vertical-align: middle;
+  height: 100px;
+  width: 100px;
   font-size: 1.5rem;
   font-weight: bold;
-  text-align: center;
-  color: blue;
+  color: navy;
 }
 a {
   text-decoration: none;
