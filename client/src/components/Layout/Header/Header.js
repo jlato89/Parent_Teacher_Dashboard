@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import MailIcon from '../../../assets/images/outline_mail_white_24.png';
 import SearchIcon from '../../../assets/images/outline_search_white_24.png';
@@ -22,9 +23,9 @@ const Header = props => {
     headerContent = (
       <div className={styles.topHeader}>
         {/* Left Button */}
-        <a href='/dashboard'>
+        <Link to='/dashboard'>
           <img src={HomeIcon} alt='Home' height='30px' />
-        </a>
+        </Link>
         {/* Middle */}
         <span className={styles.topHeaderText}>
           {props.title ? props.title : 'PT Dashboard'}
@@ -38,9 +39,9 @@ const Header = props => {
       <>
         <div className={styles.topHeader}>
           {/* Left Button */}
-          <a href='/mail'>
+          <Link to='/mail'>
             <img src={MailIcon} alt='Mail' height='30px' />
-          </a>
+          </Link>
           {/* Middle */}
           <img
             className={styles.profileImg}
@@ -48,9 +49,9 @@ const Header = props => {
             alt='Profile Img'
           />
           {/* Right Button */}
-          <a href='/search'>
+          <Link to='/search'>
             <img src={SearchIcon} alt='Search' height='30px' />
-          </a>
+          </Link>
         </div>
         <div className={styles.bottomHeaderText}>
           <p>
