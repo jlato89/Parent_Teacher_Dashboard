@@ -73,8 +73,10 @@ class Dashboard extends Component {
           >
             <Announcements events={eventArr} />
             <DashBtns access={user.userType} />
-            <UpcomingEvents events={eventArr} />
           </Layout>
+          <footer>
+            <UpcomingEvents events={eventArr} />
+          </footer>
         </>
       );
     }
