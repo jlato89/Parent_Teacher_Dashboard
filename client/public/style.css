@@ -1,0 +1,10 @@
+/* Enables Sticky Footer */
+#root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+/* Main content expands as needed */
+main {
+  flex: 1;
+}
