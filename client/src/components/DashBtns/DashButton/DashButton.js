@@ -5,8 +5,8 @@ import styles from './DashButton.module.css';
 const DashButton = props => {
   return (
     props.buttons.map(btn => (
-      <div className={styles.container}>
-        <Link className={styles.menuBtnTitle} key={btn.name} to={btn.url}>
+      <div className={styles.container} key={btn.name}>
+        <Link className={styles.menuBtnTitle} to={btn.url}>
           {btn.name}
         </Link>
       </div>
