@@ -15,12 +15,11 @@ class Dashboard extends Component {
       redirect: false,
       loading: true,
       user: {},
-      eventArr: [],
-      reportArr: [],
+      eventArr: []
     };
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     //? Check for token in localStorage, if true set default headers
     const token = localStorage.getItem('ptDash');
     if (token) setAuthToken(token);
@@ -45,6 +44,7 @@ class Dashboard extends Component {
       .catch(err => console.log(err.response));
   }
 
+  //? Logout Button
   handleLogout = () => {
     localStorage.removeItem('ptDash');
     this.setState({ redirect: true });
@@ -54,15 +54,15 @@ class Dashboard extends Component {
     const { redirect, user, eventArr } = this.state;
     let dashboardContent;
 
-    //? Redirect to homepage if logged-out
+    //? Redirect to homepage if logging-out
     if (redirect) {
       return <Redirect to='/' />;
     }
-    //? Content to render when app is loading
+    //? Content when app is still loading
     if (this.state.loading) {
       dashboardContent = <Loading />;
     }
-    //? Content to render when app is finished loading
+    //? Content when app is finished loading
     else {
       dashboardContent = (
         <>
