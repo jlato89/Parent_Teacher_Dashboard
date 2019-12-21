@@ -35,7 +35,7 @@ const ReportForm = (props) => (
             />
           </div>
           <div>
-            <label>Today I was felt</label><br />
+            <label>Today I was felt</label>
             <Field name='attitude' component='select'>
               <option value='default'>Choose One</option>{/* Validate to avoid value 'default' */}
               <option value='happy'>Happy</option>
@@ -46,7 +46,7 @@ const ReportForm = (props) => (
             </Field>
           </div>
           <div>
-            <label>Today I enjoyed</label><br />
+            <label>Today I enjoyed</label>
             <Field
               className={styles.inline}
               name='enjoyed'
@@ -125,7 +125,7 @@ const ReportForm = (props) => (
             />
           </div>
           <div>
-            <label>Needed Supplies</label><br />
+            <label>Needed Supplies</label>
             <Field
               className={styles.inline}
               name='suppliesNeeded'
@@ -170,11 +170,13 @@ const ReportForm = (props) => (
           </Condition>
 
           <div>
-            <label>Comments</label><br />
+            <label>Comments</label>
             <Field
               name='comments'
               component='textarea'
               placeholder='Comments'
+              cols='40'
+              rows='3'
             />
           </div>
 
