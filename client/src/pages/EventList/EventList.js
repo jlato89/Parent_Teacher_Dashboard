@@ -5,7 +5,7 @@ import axios from 'axios';
 import Layout from '../../components/Layout/Layout';
 import Moment from 'react-moment';
 
-const Students = () => {
+const EventList = () => {
   const [data, setData] = useState({ eventArr: [] });
 
   useEffect(() => {
@@ -42,4 +42,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default EventList;
