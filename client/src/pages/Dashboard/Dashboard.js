@@ -15,17 +15,11 @@ class Dashboard extends Component {
     this.state = {
       redirect: false,
       loading: true,
-      user: {},
       eventArr: []
     };
   }
 
   componentDidMount() {
-    const user = this.context;
-    console.log('User:', user);
-
-    this.setState({ user })
-
     //? Grab events
     axios('/api/findEvent')
       .then(events => {
@@ -42,7 +36,9 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { redirect, user, eventArr, loading } = this.state;
+    const { redirect, eventArr, loading } = this.state;
+    const user = this.context;
+    if (user) console.log('User:', user);
 
     //? Redirect to homepage if logging-out
     if (redirect) {
@@ -50,7 +46,8 @@ class Dashboard extends Component {
     }
 
     return (
-      loading ? <Loading /> // If app is Loading, show loading component
+      //? Show loading screen if userContext or events haven't loaded
+      loading || !user ? <Loading />
         :
         <>
           <Layout
