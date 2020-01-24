@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import { UserProvider } from './UserContext';
@@ -16,15 +16,14 @@ import AddStudent from './pages/Students/AddStudent/AddStudent';
 import NoMatch from './pages/NoMatch';
 
 const App = () => {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const token = localStorage.getItem('ptDash');
+  if (token) setAuthToken(token);
 
-  if (!user && token) {
+  useEffect(() => {
     console.log('[APP] Setting current user to state');
-    setAuthToken(token);
-    setUser({ userId: 123, name: 'Josh L' }) // Inittial testing data
-    axios('/api/findUser').then(user => setUser(user.data.user)); //! Not being set on first render
-  }
+    axios('/api/findUser').then(user => setUser(user.data.user));
+  }, []); // }, []);
 
   return (
     <UserProvider value={user}>
