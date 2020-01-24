@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
+import UserContext from '../../UserContext';
 import axios from 'axios';
-import setAuthToken from '../../utils/setAuthToken';
 import Layout from '../../components/Layout/Layout';
 import DashBtns from '../../components/DashBtns/DashBtns';
 import Announcements from '../../components/Events/Announcement/Announcement';
@@ -9,6 +9,7 @@ import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvent
 import Loading from '../../components/UI/Loading/Loading';
 
 class Dashboard extends Component {
+  static contextType = UserContext;
   constructor() {
     super();
     this.state = {
@@ -20,28 +21,18 @@ class Dashboard extends Component {
   }
 
   componentDidMount() {
-    //? Check for token in localStorage, if true set default headers
-    const token = localStorage.getItem('ptDash');
-    if (token) setAuthToken(token);
+    const user = this.context;
+    console.log('User:', user);
 
-    //? Start initial Axios Calls
-    axios
-      .all([
-        axios.get('/api/findUser'),
-        axios.get('/api/findEvent')
-      ])
-      .then(
-        axios.spread((userData, eventData) => {
-          console.log('Current User:', userData.data.user);
-          console.log('All Events:', eventData.data);
-          this.setState({
-            user: userData.data.user,
-            eventArr: eventData.data,
-            loading: false
-          });
-        })
-      )
-      .catch(err => console.log(err.response));
+    this.setState({ user })
+
+    //? Grab events
+    axios('/api/findEvent')
+      .then(events => {
+        console.log('Events:', events.data);
+        this.setState({ eventArr: events.data, loading: false })
+      })
+      .catch(err => console.log(err));
   }
 
   //? Logout Button
@@ -51,20 +42,16 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { redirect, user, eventArr } = this.state;
-    let dashboardContent;
+    const { redirect, user, eventArr, loading } = this.state;
 
     //? Redirect to homepage if logging-out
     if (redirect) {
       return <Redirect to='/' />;
     }
-    //? Content when app is still loading
-    if (this.state.loading) {
-      dashboardContent = <Loading />;
-    }
-    //? Content when app is finished loading
-    else {
-      dashboardContent = (
+
+    return (
+      loading ? <Loading /> // If app is Loading, show loading component
+        :
         <>
           <Layout
             onClickLogout={this.handleLogout}
@@ -78,9 +65,7 @@ class Dashboard extends Component {
             <UpcomingEvents events={eventArr} />
           </footer>
         </>
-      );
-    }
-    return <>{dashboardContent}</>;
+    );
   }
 }
 
