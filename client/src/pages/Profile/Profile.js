@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import setAuthToken from '../../utils/setAuthToken';
-import axios from 'axios';
+import UserContext from '../../UserContext';
 import Layout from '../../components/Layout/Layout';
+import Loading from '../../components/UI/Loading/Loading';
 import ProfileForm from './ProfileForm/ProfileForm';
 
 class Profile extends Component {
+  static contextType = UserContext;
   constructor() {
     super();
     this.state = {
@@ -14,38 +15,23 @@ class Profile extends Component {
     };
   }
 
-  componentDidMount() {
-    //? Check for token in localStorage, if true set default headers
-    const token = localStorage.getItem('ptDash');
-    if (token) {
-      setAuthToken(token);
-    }
-
-    axios
-      .get('/api/findUser')
-      .then(user => {
-        console.log(user.data);
-        this.setState(user.data);
-      })
-      .catch(err => console.log(err.response));
-  }
-
   onSubmit = (formObj) => {
-    console.log('[Container]', formObj);
+    console.log('[PROFILE]', formObj);
   }
 
 
   render() {
-    const { user } = this.state;
+    const { user } = this.context;
+    if (user) console.log('User:', user);
+
     return (
-      <div>
-        <Layout miniHeader={true} title='Your Profile' />
-        {user ? (
-          <ProfileForm user={user} onSubmit={this.onSubmit} />
-        ) : (
-            'Loading...'
-          )}
-      </div>
+      <>
+        <Layout miniHeader title='Your Profile' />
+        {user
+          ? <ProfileForm user={user} onSubmit={this.onSubmit} />
+          : <Loading />
+        }
+      </>
     );
   }
 }
