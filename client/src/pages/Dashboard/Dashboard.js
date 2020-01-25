@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Redirect } from 'react-router-dom';
 import UserContext from '../../UserContext';
 import axios from 'axios';
 import Layout from '../../components/Layout/Layout';
@@ -13,7 +12,6 @@ class Dashboard extends Component {
   constructor() {
     super();
     this.state = {
-      redirect: false,
       loading: true,
       eventArr: []
     };
@@ -29,32 +27,17 @@ class Dashboard extends Component {
       .catch(err => console.log(err));
   }
 
-  //? Logout Button
-  handleLogout = () => {
-    localStorage.removeItem('ptDash');
-    this.setState({ redirect: true });
-  };
-
   render() {
-    const { redirect, eventArr, loading } = this.state;
-    const user = this.context;
+    const { eventArr, loading } = this.state;
+    const { user } = this.context;
     if (user) console.log('User:', user);
-
-    //? Redirect to homepage if logging-out
-    if (redirect) {
-      return <Redirect to='/' />;
-    }
 
     return (
       //? Show loading screen if userContext or events haven't loaded
       loading || !user ? <Loading />
         :
         <>
-          <Layout
-            onClickLogout={this.handleLogout}
-            profileImg={user.profileImage}
-            name={user.firstName}
-          >
+          <Layout>
             <Announcements events={eventArr} />
             <DashBtns access={user.userType} />
           </Layout>
