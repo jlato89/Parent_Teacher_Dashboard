@@ -22,9 +22,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.updateUser()
+  }
+
+  updateUser = () => {
     const token = localStorage.getItem('ptDash');
     if (token) setAuthToken(token);
-    console.log('[APP] Setting current user to state');
+    console.log('[APP] Updating current user in state...');
     axios('/api/findUser')
       .then(user => {
         let result = user.data;
@@ -33,7 +37,7 @@ class App extends Component {
       });
   }
 
-  handleLogout = () => {
+  logoutHandler = () => {
     localStorage.removeItem('ptDash');
     this.setState({ user: null });
   };
@@ -42,7 +46,7 @@ class App extends Component {
     const { user } = this.state;
     const value = {
       user,
-      logoutUser: this.handleLogout
+      logoutUser: this.logoutHandler
     }
 
     return (
