@@ -53,7 +53,7 @@ class App extends Component {
       <UserProvider value={value}>
         <Router>
           <Switch>
-            <Route exact path='/' component={Login} />
+            <Route exact path='/' render={(props) => <Login {...props} updateUser={() => this.updateUser()} />} />
             <PrivateRoute exact path='/dashboard' component={Dashboard} />
             <PrivateRoute exact path='/createReport' component={CreateReport} />
             <PrivateRoute exact path='/students' component={Students} />
