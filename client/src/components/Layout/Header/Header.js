@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import UserContext from '../../../UserContext';
 import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
 import MailIcon from '../../../assets/images/outline_mail_white_24.png';
@@ -16,7 +17,8 @@ if (curHr < 12) { greetingMsg = 'Good Morning'; }
 else if (curHr < 18) { greetingMsg = 'Good Afternoon'; }
 else { greetingMsg = 'Good Evening'; }
 
-const Header = props => {
+const Header = (props) => {
+  const { user, logoutUser } = useContext(UserContext);
   let headerContent;
 
   if (props.miniHeader) {
@@ -45,7 +47,7 @@ const Header = props => {
           {/* Middle */}
           <img
             className={styles.profileImg}
-            src={props.profileImg ? props.profileImg : ProfileImgDefault}
+            src={user.profileImage ? user.profileImage : ProfileImgDefault}
             alt='Profile Img'
           />
           {/* Right Button */}
@@ -55,7 +57,7 @@ const Header = props => {
         </div>
         <div className={styles.bottomHeaderText}>
           <p>
-            <strong>Hi {props.name},</strong> {greetingMsg}
+            <strong>Hi {user.firstName},</strong> {greetingMsg}
           </p>
           <p>
             <Moment format='ddd, MMM Do YYYY' date={date} />
@@ -63,7 +65,7 @@ const Header = props => {
               className={styles.logoutIcon}
               src={LogoutIcon}
               alt='Logout'
-              onClick={props.onClickLogout}
+              onClick={logoutUser}
             />
           </p>
         </div>
