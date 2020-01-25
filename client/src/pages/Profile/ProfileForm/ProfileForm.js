@@ -1,8 +1,6 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form';
 
-import styles from './ProfileForm.module.css';
-
 const normalizePhone = value => {
   if (!value) return value;
   const onlyNums = value.replace(/[^\d]/g, "");
