@@ -43,7 +43,7 @@ class Login extends Component {
           const { token } = response.data
 
           localStorage.setItem('ptDash', token)
-
+          this.props.updateUser();
           this.setState({
             errors: '',
             redirect: true
