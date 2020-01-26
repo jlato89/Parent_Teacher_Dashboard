@@ -14,14 +14,14 @@ const Announcement = props => {
           return (
             <div key={announcement.id}>
               <span className={styles.date}>
-                (<Moment date={announcement.eventDate} format='MM/DD' />)
+                (<Moment date={announcement.eventDate} format='ddd, MMM Do' />)
               </span>
-              <span className={styles.desc}>{announcement.description}</span>
+              <span className={styles.desc}>{announcement.title}</span>
             </div>
           );
         })}
       </div>
-    : null
+      : null
   );
 };
 
