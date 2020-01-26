@@ -17,7 +17,7 @@ const UpcomingEvents = props => {
         {eventArr.map(event => (
           <div key={event.id}>
             <span className={styles.date}>
-              <Moment format='ddd, MMM D' date={event.eventDate} />
+              <Moment format='ddd, MMM Do' date={event.eventDate} />
               {' : '}
             </span>
             <span className={styles.title}>{event.title}</span>
