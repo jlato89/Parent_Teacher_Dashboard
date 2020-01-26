@@ -44,7 +44,7 @@ const Header = (props) => {
           <Link to='/mail'>
             <img src={MailIcon} alt='Mail' height='30px' />
           </Link>
-          {/* Middle */}
+          {/* Profile Img */}
           <img
             className={styles.profileImg}
             src={user.profileImage ? user.profileImage : ProfileImgDefault}
@@ -55,19 +55,15 @@ const Header = (props) => {
             <img src={SearchIcon} alt='Search' height='30px' />
           </Link>
         </div>
-        <div className={styles.bottomHeaderText}>
-          <p>
-            <strong>Hi {user.firstName},</strong> {greetingMsg}
-          </p>
-          <p>
-            <Moment format='ddd, MMM Do YYYY' date={date} />
-            <img
-              className={styles.logoutIcon}
-              src={LogoutIcon}
-              alt='Logout'
-              onClick={logoutUser}
-            />
-          </p>
+        <div className={styles.bottomHeader}>
+          <p><strong>Hi {user.firstName}, </strong>{greetingMsg}</p>
+          <span><Moment format='ddd, MMM Do YYYY' date={date} /></span>
+          <img
+            className={styles.logoutIcon}
+            src={LogoutIcon}
+            alt='Logout'
+            onClick={logoutUser}
+          />
         </div>
       </>
     )

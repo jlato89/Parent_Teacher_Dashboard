@@ -18,13 +18,19 @@
 .profileImg {
   height: 130px;
   border-radius: 100%;
-  margin: 4% 0;
+  margin: 5px 0;
 }
-.bottomHeaderText p {
+.bottomHeader {
+  position: relative;
   color: #fff;
+  line-height: 1.2;
+}
+.bottomHeader p {
   margin: 0;
 }
 .logoutIcon {
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
   height: 30px;
-  float: right;
 }
