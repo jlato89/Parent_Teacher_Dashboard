@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UserContext from '../../UserContext';
 import axios from 'axios';
 import Layout from '../../components/Layout/Layout';
-import DashBtns from '../../components/DashBtns/DashBtns';
+import DashBtns from '../../components/DashButtons/DashButtonsContainer';
 import Announcements from '../../components/Events/Announcement/Announcement';
 import UpcomingEvents from '../../components/Events/UpcomingEvents/UpcomingEvents';
 import Loading from '../../components/UI/Loading/Loading';

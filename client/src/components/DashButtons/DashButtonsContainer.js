@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button/Button';
-import styles from './DashBtns.module.css';
+import styles from './DashButtonsContainer.module.css';
 
 const menuBtns = [
   {
@@ -35,7 +35,7 @@ const menuBtns = [
   }
 ]
 
-const DashBtns = props => {
+const DashButtonsContainer = props => {
   let btnsToDisplay;
 
   //? Menu Buttons depending on user access
@@ -57,4 +57,4 @@ const DashBtns = props => {
   )
 }
 
-export default DashBtns
+export default DashButtonsContainer
