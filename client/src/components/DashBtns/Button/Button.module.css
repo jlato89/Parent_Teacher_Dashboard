@@ -1,0 +1,27 @@
+.btnContainer {
+  position: relative;
+  text-align: center;
+  height: 80%;
+  width: 80%;
+  border: 2px rgb(64, 64, 231) solid;
+  border-radius: 30px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.btnImg {
+  width: 100%;
+  height: 100%;
+}
+
+.btnOverlay {
+  position: absolute;
+  background-color: rgb(64, 64, 231, 0.6);
+  border-radius: 0 0 5px 5px;
+  color: white;
+  width: 100%;
+  top: 75%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 3px;
+}

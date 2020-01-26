@@ -1,5 +1,7 @@
 .container {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  align-content: space-between;
 }

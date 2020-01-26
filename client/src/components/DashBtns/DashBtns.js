@@ -1,5 +1,5 @@
 import React from 'react';
-import DashButton from './DashButton/DashButton';
+import Button from './Button/Button';
 import styles from './DashBtns.module.css';
 
 const menuBtns = [
@@ -37,6 +37,7 @@ const menuBtns = [
 
 const DashBtns = props => {
   let btnsToDisplay;
+
   //? Menu Buttons depending on user access
   switch (props.access) {
     case 'admin':
@@ -51,7 +52,7 @@ const DashBtns = props => {
   }
   return (
     <div className={styles.container}>
-      <DashButton buttons={btnsToDisplay} />
+      <Button buttons={btnsToDisplay} />
     </div>
   )
 }
