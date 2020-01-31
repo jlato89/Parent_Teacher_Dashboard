@@ -1,36 +1,47 @@
-.wrapper {
+.container {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #00f0ff 100%),
     #1fa1ff;
-  text-align: center;
-  height: fit-content;
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-areas:
+    'leftBtn     title     rightBtn'
+    'leftBtn  profileImg   rightBtn'
+    '   .     profileImg      .    '
+    '   .      greeting  logoutIcon';
   padding: 10px;
 }
-.topHeader {
-  display: flex;
-  justify-content: space-between;
+.leftBtn {
+  grid-area: leftBtn;
+  place-self: start;
 }
-.topHeaderText {
+.rightBtn {
+  grid-area: rightBtn;
+  place-self: start end;
+}
+.title {
+  grid-area: title;
+  place-self: center;
   font-size: 1.4rem;
   font-weight: bold;
   text-decoration: none;
   color: #fff;
 }
 .profileImg {
+  grid-area: profileImg;
+  place-self: center;
   height: 130px;
   border-radius: 100%;
   margin: 5px 0;
 }
-.bottomHeader {
-  position: relative;
+.greeting {
+  grid-area: greeting;
+  place-self: center;
   color: #fff;
+  text-align: center;
   line-height: 1.2;
-}
-.bottomHeader p {
   margin: 0;
 }
 .logoutIcon {
-  position: absolute;
-  bottom: 0%;
-  right: 0%;
-  height: 30px;
+  grid-area: logoutIcon;
+  place-self: end;
 }
