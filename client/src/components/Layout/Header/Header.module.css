@@ -2,21 +2,29 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #00f0ff 100%),
     #1fa1ff;
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas:
-    'leftBtn     title     rightBtn'
-    'leftBtn  profileImg   rightBtn'
-    '   .     profileImg      .    '
-    '   .      greeting  logoutIcon';
+    'leftBtn      title     rightBtn'
+    'leftImg   profileImg   rightImg'
+    'leftImg   profileImg   rightImg'
+    '   .       greeting  logoutIcon';
   padding: 10px;
 }
 .leftBtn {
   grid-area: leftBtn;
   place-self: start;
 }
+.leftImg {
+  grid-area: leftImg;
+  place-self: center;
+}
 .rightBtn {
   grid-area: rightBtn;
   place-self: start end;
+}
+.rightImg {
+  grid-area: rightImg;
+  place-self: center;
 }
 .title {
   grid-area: title;
@@ -35,6 +43,7 @@
 }
 .greeting {
   grid-area: greeting;
+  grid-column: 1 / span 3;
   place-self: center;
   color: #fff;
   text-align: center;

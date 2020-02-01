@@ -4,6 +4,7 @@ import MailIcon from '../Images/outline_mail_white_24.png';
 import SearchIcon from '../Images/outline_search_white_24.png';
 import HomeIcon from '../Images/outline_home_white_18dp.png';
 import MenuBtn from '../Images/outline_menu_white_24.png';
+import AbcBlocksImg from '../Images/ABC_blocks.png';
 
 export const MailLink = ({ style }) => {
   return (
@@ -34,5 +35,10 @@ export const MenuLink = ({ style }) => {
     <Link to='/Menu' className={style}>
       <img src={MenuBtn} alt='Menu' height='30px' />
     </Link>
+  )
+}
+export const AbcBlocks = ({ style }) => {
+  return (
+    <img className={style} src={AbcBlocksImg} alt='Menu' width='90%' />
   )
 }
